@@ -17,7 +17,7 @@ export async function trainCommand(): Promise<void> {
     error(
       `Not enough training samples. You have ${samples.length}, but ${config.type} tasks require at least ${minSamples}.`
     );
-    info(`Add more samples with: distill add`);
+    info(`Add more samples with: expressible distill add`);
     process.exit(1);
   }
 

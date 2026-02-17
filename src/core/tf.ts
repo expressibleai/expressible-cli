@@ -17,7 +17,7 @@ export async function loadTf(): Promise<TF> {
       return tfInstance;
     } catch {
       throw new Error(
-        'Could not load TensorFlow.js. Run "npm install" in the distill directory, or run "distill doctor" to diagnose.'
+        'Could not load TensorFlow.js. Run "npm install" in the project directory, or run "expressible distill doctor" to diagnose.'
       );
     }
   }

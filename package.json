@@ -1,11 +1,11 @@
 {
-  "name": "distill-cli",
+  "name": "expressible",
   "version": "0.1.0",
-  "description": "Train small, local ML models from input/output example pairs",
+  "description": "Open-source CLI toolkit by Expressible AI, Inc.",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "distill": "dist/index.js"
+    "expressible": "dist/index.js"
   },
   "scripts": {
     "build": "tsc && cp -r src/ui/static dist/ui/static",
@@ -15,7 +15,7 @@
     "test:watch": "vitest"
   },
   "keywords": ["ml", "local", "training", "cli", "inference"],
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {
     "@tensorflow/tfjs": "^4.22.0",
     "@tensorflow/tfjs-node": "^4.22.0",

@@ -11,7 +11,7 @@ export async function exportCommand(outputDir: string): Promise<void> {
   const metadataPath = getModelMetadataPath(taskDir);
 
   if (!fs.existsSync(metadataPath)) {
-    error('No trained model found. Run "distill train" first.');
+    error('No trained model found. Run "expressible distill train" first.');
     process.exit(1);
   }
 

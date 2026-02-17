@@ -53,7 +53,7 @@ export async function doctorCommand(): Promise<void> {
     const size = getDirectorySize(modelMarker);
     checks.push({ name: 'Embedding model', status: 'pass', message: `Downloaded (${formatBytes(size)}) at ${modelMarker}` });
   } else {
-    checks.push({ name: 'Embedding model', status: 'warn', message: 'Not downloaded yet. Will download on first "distill train" (~80MB). Or run: distill setup' });
+    checks.push({ name: 'Embedding model', status: 'warn', message: 'Not downloaded yet. Will download on first "expressible distill train" (~80MB). Or run: expressible distill setup' });
   }
 
   // 5. Disk space
@@ -97,7 +97,7 @@ export async function doctorCommand(): Promise<void> {
         const meta = JSON.parse(fs.readFileSync(modelMetadata, 'utf-8'));
         checks.push({ name: 'Trained model', status: 'pass', message: `Trained at ${new Date(meta.trainedAt).toLocaleString()}` });
       } else {
-        checks.push({ name: 'Trained model', status: 'warn', message: 'No model trained yet. Run: distill train' });
+        checks.push({ name: 'Trained model', status: 'warn', message: 'No model trained yet. Run: expressible distill train' });
       }
     } catch {
       checks.push({ name: 'Current project', status: 'fail', message: 'distill.config.json is corrupted' });

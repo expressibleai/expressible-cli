@@ -50,5 +50,5 @@ export async function initCommand(taskName: string): Promise<void> {
   writeConfig(taskDir, config);
 
   success(`Created distill project "${taskName}" (${answers.type})`);
-  info(`Add training examples with: cd ${taskName} && distill add`);
+  info(`Add training examples with: cd ${taskName} && expressible distill add`);
 }

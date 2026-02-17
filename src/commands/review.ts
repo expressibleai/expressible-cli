@@ -13,7 +13,7 @@ export async function reviewCommand(): Promise<void> {
   const samples = loadSamples(taskDir);
 
   if (samples.length === 0) {
-    error('No samples found. Add training data first with: distill add');
+    error('No samples found. Add training data first with: expressible distill add');
     process.exit(1);
   }
 

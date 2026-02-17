@@ -60,7 +60,7 @@ export async function runCommand(inputArg?: string): Promise<void> {
     const chunks: Buffer[] = [];
     const stdin = process.stdin;
     if (stdin.isTTY) {
-      error('No input provided. Use: distill run <file> or echo "text" | distill run');
+      error('No input provided. Use: expressible distill run <file> or echo "text" | expressible distill run');
       process.exit(1);
     }
 

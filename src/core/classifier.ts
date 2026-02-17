@@ -200,7 +200,7 @@ export async function predict(
   const metadataPath = path.join(modelDir, 'metadata.json');
 
   if (!fs.existsSync(metadataPath)) {
-    throw new Error('No trained model found. Run "distill train" first.');
+    throw new Error('No trained model found. Run "expressible distill train" first.');
   }
 
   const metadata: ClassifierMetadata = JSON.parse(
