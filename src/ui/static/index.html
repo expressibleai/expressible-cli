@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Distill — Review</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    .header {
+      background: #fff;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .header h1 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #111;
+    }
+
+    .header h1 span {
+      color: #6366f1;
+    }
+
+    .stats-bar {
+      display: flex;
+      gap: 20px;
+      font-size: 13px;
+      color: #666;
+    }
+
+    .stats-bar .stat-value {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .progress-container {
+      background: #fff;
+      padding: 12px 24px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: #e5e7eb;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #6366f1;
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+
+    .progress-text {
+      font-size: 12px;
+      color: #999;
+      margin-top: 4px;
+    }
+
+    .main {
+      max-width: 1200px;
+      margin: 24px auto;
+      padding: 0 24px;
+    }
+
+    .panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .panels { grid-template-columns: 1fr; }
+    }
+
+    .panel {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .panel-header {
+      padding: 12px 16px;
+      background: #fafafa;
+      border-bottom: 1px solid #e0e0e0;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #888;
+    }
+
+    .panel-body {
+      padding: 16px;
+      font-size: 14px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+      min-height: 120px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .actions {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .btn {
+      padding: 10px 32px;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn:active { transform: scale(0.97); }
+
+    .btn-approve {
+      background: #ecfdf5;
+      color: #059669;
+      border-color: #a7f3d0;
+    }
+    .btn-approve:hover { background: #d1fae5; }
+    .btn-approve.active { background: #059669; color: #fff; }
+
+    .btn-reject {
+      background: #fef2f2;
+      color: #dc2626;
+      border-color: #fecaca;
+    }
+    .btn-reject:hover { background: #fee2e2; }
+    .btn-reject.active { background: #dc2626; color: #fff; }
+
+    .correction-area {
+      margin-top: 12px;
+      display: none;
+    }
+
+    .correction-area.visible {
+      display: block;
+    }
+
+    .correction-area label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: #666;
+      margin-bottom: 6px;
+    }
+
+    .correction-area textarea {
+      width: 100%;
+      min-height: 80px;
+      padding: 10px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-family: 'SF Mono', Monaco, Consolas, monospace;
+      font-size: 13px;
+      resize: vertical;
+    }
+
+    .correction-area textarea:focus {
+      outline: none;
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+    }
+
+    .nav-btn {
+      padding: 8px 20px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      background: #fff;
+      font-size: 14px;
+      cursor: pointer;
+      color: #374151;
+    }
+    .nav-btn:hover { background: #f9fafb; }
+    .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .nav-info {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .done-btn {
+      padding: 8px 20px;
+      border: 1px solid #6366f1;
+      border-radius: 6px;
+      background: #6366f1;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .done-btn:hover { background: #4f46e5; }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #999;
+    }
+
+    .keyboard-hint {
+      text-align: center;
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 10px;
+    }
+
+    kbd {
+      padding: 2px 6px;
+      background: #f3f4f6;
+      border: 1px solid #d1d5db;
+      border-radius: 3px;
+      font-size: 11px;
+      font-family: inherit;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1><span>distill</span> — Review</h1>
+    <div class="stats-bar" id="stats-bar">
+      <div>Reviewed: <span class="stat-value" id="stat-reviewed">0</span></div>
+      <div>Approved: <span class="stat-value" id="stat-approved">0</span></div>
+      <div>Rejected: <span class="stat-value" id="stat-rejected">0</span></div>
+      <div>Approval rate: <span class="stat-value" id="stat-rate">—</span></div>
+    </div>
+  </div>
+
+  <div class="progress-container">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+    </div>
+    <div class="progress-text" id="progress-text">Loading...</div>
+  </div>
+
+  <div class="main">
+    <div id="content">
+      <div class="panels">
+        <div class="panel">
+          <div class="panel-header">Input</div>
+          <div class="panel-body" id="input-display"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">Predicted Output</div>
+          <div class="panel-body" id="output-display"></div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <div class="action-buttons">
+          <button class="btn btn-approve" id="btn-approve" onclick="score(true)">
+            👍 Approve
+          </button>
+          <button class="btn btn-reject" id="btn-reject" onclick="score(false)">
+            👎 Reject
+          </button>
+        </div>
+
+        <div class="correction-area" id="correction-area">
+          <label for="correction">What should the correct output be?</label>
+          <textarea id="correction" placeholder="Enter the correct output..."></textarea>
+        </div>
+
+        <div class="nav">
+          <button class="nav-btn" id="btn-prev" onclick="navigate(-1)">← Previous</button>
+          <span class="nav-info" id="nav-info">— / —</span>
+          <button class="nav-btn" id="btn-next" onclick="navigate(1)">Next →</button>
+          <button class="done-btn" onclick="finish()">Done</button>
+        </div>
+
+        <div class="keyboard-hint">
+          <kbd>→</kbd> Approve &nbsp; <kbd>←</kbd> Reject &nbsp; <kbd>Enter</kbd> Next
+        </div>
+      </div>
+    </div>
+
+    <div class="empty-state" id="empty-state" style="display:none">
+      <h2>All items reviewed!</h2>
+      <p>You've reviewed all items. Close this tab or click Done.</p>
+    </div>
+  </div>
+
+  <script>
+    let items = [];
+    let currentIndex = 0;
+
+    async function init() {
+      const res = await fetch('/api/items');
+      items = await res.json();
+      if (items.length === 0) {
+        document.getElementById('content').style.display = 'none';
+        document.getElementById('empty-state').style.display = 'block';
+        return;
+      }
+      // Start at first unreviewed item
+      const firstUnreviewed = items.findIndex(i => !i.reviewedAt);
+      currentIndex = firstUnreviewed >= 0 ? firstUnreviewed : 0;
+      render();
+      updateStats();
+    }
+
+    function render() {
+      const item = items[currentIndex];
+      if (!item) return;
+
+      document.getElementById('input-display').textContent = item.input;
+      document.getElementById('output-display').textContent = item.predictedOutput;
+      document.getElementById('nav-info').textContent =
+        `${currentIndex + 1} / ${items.length}`;
+
+      document.getElementById('btn-prev').disabled = currentIndex === 0;
+      document.getElementById('btn-next').disabled = currentIndex === items.length - 1;
+
+      // Show current state
+      const approveBtn = document.getElementById('btn-approve');
+      const rejectBtn = document.getElementById('btn-reject');
+      const correctionArea = document.getElementById('correction-area');
+
+      approveBtn.classList.toggle('active', item.reviewedAt && item.approved === true);
+      rejectBtn.classList.toggle('active', item.reviewedAt && item.approved === false);
+
+      if (item.reviewedAt && item.approved === false) {
+        correctionArea.classList.add('visible');
+        document.getElementById('correction').value = item.correctedOutput || '';
+      } else {
+        correctionArea.classList.remove('visible');
+        document.getElementById('correction').value = '';
+      }
+    }
+
+    async function score(approved) {
+      const item = items[currentIndex];
+      const correctedOutput = !approved
+        ? document.getElementById('correction').value.trim() || undefined
+        : undefined;
+
+      await fetch('/api/score', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: item.id,
+          approved,
+          correctedOutput,
+        }),
+      });
+
+      item.approved = approved;
+      item.reviewedAt = new Date().toISOString();
+      if (correctedOutput) item.correctedOutput = correctedOutput;
+
+      // Show/hide correction area
+      const correctionArea = document.getElementById('correction-area');
+      if (!approved) {
+        correctionArea.classList.add('visible');
+        document.getElementById('correction').focus();
+      } else {
+        correctionArea.classList.remove('visible');
+      }
+
+      render();
+      updateStats();
+
+      // Auto-advance on approve
+      if (approved && currentIndex < items.length - 1) {
+        setTimeout(() => navigate(1), 300);
+      }
+    }
+
+    function navigate(delta) {
+      const newIndex = currentIndex + delta;
+      if (newIndex >= 0 && newIndex < items.length) {
+        // Save any pending correction before navigating
+        const item = items[currentIndex];
+        if (item.reviewedAt && item.approved === false) {
+          const correction = document.getElementById('correction').value.trim();
+          if (correction && correction !== item.correctedOutput) {
+            fetch('/api/score', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                id: item.id,
+                approved: false,
+                correctedOutput: correction,
+              }),
+            });
+            item.correctedOutput = correction;
+          }
+        }
+        currentIndex = newIndex;
+        render();
+      }
+    }
+
+    async function updateStats() {
+      const res = await fetch('/api/stats');
+      const stats = await res.json();
+
+      document.getElementById('stat-reviewed').textContent = stats.reviewed;
+      document.getElementById('stat-approved').textContent = stats.approved;
+      document.getElementById('stat-rejected').textContent = stats.rejected;
+      document.getElementById('stat-rate').textContent =
+        stats.reviewed > 0 ? stats.approvalRate + '%' : '—';
+
+      const pct = stats.total > 0 ? (stats.reviewed / stats.total) * 100 : 0;
+      document.getElementById('progress-fill').style.width = pct + '%';
+      document.getElementById('progress-text').textContent =
+        `${stats.reviewed} of ${stats.total} reviewed`;
+
+      if (stats.remaining === 0 && stats.total > 0) {
+        document.getElementById('content').style.display = 'none';
+        document.getElementById('empty-state').style.display = 'block';
+      }
+    }
+
+    async function finish() {
+      if (confirm('End review session?')) {
+        await fetch('/api/shutdown', { method: 'POST' });
+        document.body.innerHTML =
+          '<div style="display:flex;align-items:center;justify-content:center;height:100vh;color:#666;font-family:sans-serif">' +
+          '<div style="text-align:center"><h2>Review complete</h2><p>You can close this tab.</p></div></div>';
+      }
+    }
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'TEXTAREA') return;
+
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        score(true);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        score(false);
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        navigate(1);
+      }
+    });
+
+    init();
+  </script>
+</body>
+</html>

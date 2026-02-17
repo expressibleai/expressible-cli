@@ -1,0 +1,21 @@
+node_modules/
+dist/
+*.js.map
+*.d.ts.map
+
+# Test artifacts
+my-task/
+sentiment-classifier/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Distill runtime
+.distill/
+model/
+validation/
+
+# Environment
+.env
+.env.*
