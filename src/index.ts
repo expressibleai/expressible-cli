@@ -3,12 +3,21 @@
 import { Command } from 'commander';
 import { error } from './utils/display.js';
 
+let verbose = false;
+
 const program = new Command();
 
 program
   .name('distill')
   .description('Train small, local ML models from input/output example pairs')
-  .version('0.1.0');
+  .version('0.1.0')
+  .option('--verbose', 'Show detailed error messages and stack traces')
+  .hook('preAction', (thisCommand) => {
+    const opts = thisCommand.opts();
+    if (opts['verbose']) {
+      verbose = true;
+    }
+  });
 
 program
   .command('init <task-name>')
@@ -109,11 +118,41 @@ program
     }
   });
 
+program
+  .command('doctor')
+  .description('Check system requirements and project health')
+  .action(async () => {
+    try {
+      const { doctorCommand } = await import('./commands/doctor.js');
+      await doctorCommand();
+    } catch (err) {
+      handleError(err);
+    }
+  });
+
+program
+  .command('setup')
+  .description('Download embedding model and prepare for offline use')
+  .action(async () => {
+    try {
+      const { setupCommand } = await import('./commands/setup.js');
+      await setupCommand();
+    } catch (err) {
+      handleError(err);
+    }
+  });
+
 function handleError(err: unknown): void {
   if (err instanceof Error) {
     error(err.message);
+    if (verbose && err.stack) {
+      console.error('\n' + err.stack);
+    }
   } else {
     error(String(err));
+  }
+  if (!verbose) {
+    console.error('\nRun with --verbose for detailed error information.');
   }
   process.exit(1);
 }
