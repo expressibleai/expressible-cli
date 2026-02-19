@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import readline from 'node:readline';
 import inquirer from 'inquirer';
 import { findTaskDir, getSamplesDir, ensureDir } from '../utils/paths.js';
 import { readConfig } from '../core/config.js';
@@ -29,39 +30,60 @@ export async function addCommand(options: AddOptions): Promise<void> {
   await addInteractive(taskDir, config.type);
 }
 
-async function addInteractive(taskDir: string, taskType: string): Promise<void> {
-  let addMore = true;
+function readMultilineInput(prompt: string): Promise<string> {
+  return new Promise((resolve) => {
+    process.stdout.write(prompt);
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+      terminal: false,
+    });
 
-  while (addMore) {
+    const lines: string[] = [];
+    rl.on('line', (line) => {
+      if (line === '' && lines.length > 0) {
+        rl.close();
+        resolve(lines.join('\n'));
+      } else if (line === '' && lines.length === 0) {
+        rl.close();
+        resolve('');
+      } else {
+        lines.push(line);
+      }
+    });
+
+    rl.on('close', () => {
+      resolve(lines.join('\n'));
+    });
+  });
+}
+
+async function addInteractive(taskDir: string, taskType: string): Promise<void> {
+  const isClassify = taskType === 'classify';
+
+  while (true) {
     const samples = loadSamples(taskDir);
     info(`Current samples: ${samples.length}`);
 
-    const inputPrompt = taskType === 'classify'
-      ? 'Paste the input text (the text to classify):'
-      : 'Paste the input text:';
+    const input = (await readMultilineInput('? Paste input text (blank line to end, empty to quit):\n')).trim();
 
-    const outputPrompt = taskType === 'classify'
-      ? 'What category/label should this be classified as?'
-      : 'Paste the expected output:';
+    if (!input) {
+      break;
+    }
 
-    const answers = await inquirer.prompt([
-      {
-        type: 'editor',
-        name: 'input',
-        message: inputPrompt,
-      },
-      {
-        type: taskType === 'classify' ? 'input' : 'editor',
-        name: 'output',
-        message: outputPrompt,
-      },
-    ]);
+    let output: string;
 
-    const input = answers.input.trim();
-    const output = answers.output.trim();
+    if (isClassify) {
+      const { output: rawOutput } = await inquirer.prompt([
+        { type: 'input', name: 'output', message: 'Label:' },
+      ]);
+      output = rawOutput.trim();
+    } else {
+      output = (await readMultilineInput('? Paste expected output (blank line to end):\n')).trim();
+    }
 
-    if (!input || !output) {
-      error('Both input and output are required.');
+    if (!output) {
+      error('Output is required. Skipping this sample.');
       continue;
     }
 
@@ -69,17 +91,6 @@ async function addInteractive(taskDir: string, taskType: string): Promise<void> 
     const isJson = taskType === 'extract';
     saveSample(taskDir, id, input, output, isJson);
     success(`Saved sample ${id}`);
-
-    const continueAnswer = await inquirer.prompt([
-      {
-        type: 'confirm',
-        name: 'continue',
-        message: 'Add another sample?',
-        default: true,
-      },
-    ]);
-
-    addMore = continueAnswer.continue;
   }
 }
 

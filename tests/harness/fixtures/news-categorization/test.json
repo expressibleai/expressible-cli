@@ -1,0 +1,102 @@
+[
+  {
+    "input": "Canada Elects First Indigenous Prime Minister in Historic Vote. The landslide victory reshapes the country's political landscape and signals a generational shift among Canadian voters.",
+    "output": "politics"
+  },
+  {
+    "input": "United Nations General Assembly Votes to Admit Palestine as Full Member State. The resolution passed with overwhelming support despite objections from a handful of nations, marking a historic diplomatic milestone.",
+    "output": "politics"
+  },
+  {
+    "input": "Bipartisan Infrastructure Deal Allocates $60 Billion for Rural Broadband. Lawmakers hailed the agreement as a rare example of cross-party cooperation aimed at closing the digital divide in underserved communities.",
+    "output": "politics"
+  },
+  {
+    "input": "Mexico's President Declares State of Emergency Over Cartel Violence. The move authorizes military deployment to five northern states and suspends certain civil liberties for 90 days.",
+    "output": "politics"
+  },
+  {
+    "input": "Coco Gauff Defeats Iga Swiatek to Win First Wimbledon Title. The 22-year-old American rallied from a set down to claim her second Grand Slam championship on Centre Court.",
+    "output": "sports"
+  },
+  {
+    "input": "NBA Announces Expansion Franchises in Las Vegas and Seattle. Both cities will begin play in the 2027-28 season, ending Seattle's 19-year absence from professional basketball.",
+    "output": "sports"
+  },
+  {
+    "input": "Erling Haaland Scores Five Goals in Single Champions League Match. The Norwegian striker's historic performance propelled his club to a 6-1 quarterfinal victory and set a new tournament record.",
+    "output": "sports"
+  },
+  {
+    "input": "Kenya's Kelvin Kiptum Breaks Two-Hour Marathon Barrier in Official Race. The 24-year-old clocked 1:59:38 at the Berlin Marathon, achieving what many considered the last great frontier in distance running.",
+    "output": "sports"
+  },
+  {
+    "input": "Mozilla Launches Privacy-Focused Mobile Operating System. The open-source OS blocks all third-party trackers by default and gives users granular control over app permissions and data sharing.",
+    "output": "technology"
+  },
+  {
+    "input": "Neuralink Patient Controls Robotic Arm Using Brain Implant for First Time. The paralyzed volunteer demonstrated the ability to grasp objects and type on a screen during a live demonstration.",
+    "output": "technology"
+  },
+  {
+    "input": "Critical Vulnerability in Linux Kernel Exposes Millions of Servers Worldwide. The flaw allows remote code execution without authentication and affects kernel versions released over the past three years.",
+    "output": "technology"
+  },
+  {
+    "input": "Autonomous Trucking Startup Completes First Coast-to-Coast Delivery Without Human Driver. The 2,800-mile route from Los Angeles to Jacksonville took 42 hours and used only highway-grade autonomous systems.",
+    "output": "technology"
+  },
+  {
+    "input": "Pedro Almod\u00f3var Wins Best Director at Golden Globes for English-Language Debut. The Spanish auteur's first film shot entirely in English earned four awards including Best Drama.",
+    "output": "entertainment"
+  },
+  {
+    "input": "Kendrick Lamar and SZA Announce Joint Album and Co-Headlining Arena Tour. The collaboration has been teased for years and marks the first full-length project between the two TDE alumni.",
+    "output": "entertainment"
+  },
+  {
+    "input": "Hulu's Limited Series on the Theranos Scandal Draws 45 Million Viewers in First Week. The show's lead actress is already generating early Emmy buzz for her portrayal of Elizabeth Holmes.",
+    "output": "entertainment"
+  },
+  {
+    "input": "Cirque du Soleil Files for Bankruptcy Protection a Second Time. The entertainment company cited rising production costs and stagnant ticket sales as live event competition intensifies.",
+    "output": "entertainment"
+  },
+  {
+    "input": "LVMH Reports Slower Luxury Goods Demand as Chinese Consumer Spending Weakens. The conglomerate's quarterly revenue missed estimates by 8%, dragging European luxury stocks down broadly.",
+    "output": "business"
+  },
+  {
+    "input": "Boeing and Airbus Post Dueling Record Order Books at Paris Air Show. Combined new orders exceeded $150 billion as airlines race to modernize fleets with more fuel-efficient aircraft.",
+    "output": "business"
+  },
+  {
+    "input": "U.S. Housing Starts Fall to Lowest Level in Three Years. Builders pulled back as elevated mortgage rates and high material costs squeezed profit margins on new single-family homes.",
+    "output": "business"
+  },
+  {
+    "input": "Kroger-Albertsons Merger Blocked by Federal Judge on Antitrust Grounds. The ruling cited potential harm to consumers through reduced competition in grocery pricing across 48 overlapping markets.",
+    "output": "business"
+  },
+  {
+    "input": "League of Legends World Championship Draws 120 Million Peak Viewers. The esports event surpassed last year's viewership by 30%, with the grand final held at a sold-out stadium in Riyadh.",
+    "output": "sports"
+  },
+  {
+    "input": "Rivian IPO Raises $15 Billion in Largest Tech Listing of the Year. The electric vehicle maker's shares surged 40% on debut as investors bet on its commercial fleet contracts with Amazon.",
+    "output": "business"
+  },
+  {
+    "input": "Documentary on Snowden Surveillance Leaks Sparks Renewed Congressional Debate. The Oscar-shortlisted film reignited calls for reform of government surveillance programs and drew sharp reactions from both parties.",
+    "output": "entertainment"
+  },
+  {
+    "input": "Pro Gamer Signs $25 Million Contract With Esports Organization, Largest in History. The deal includes streaming rights and merchandise revenue, rivaling contracts seen in traditional professional sports leagues.",
+    "output": "sports"
+  },
+  {
+    "input": "Stripe Confidentially Files for IPO Valued at $95 Billion. The payments technology giant's public listing is expected to be the largest for a venture-backed company and a bellwether for the fintech sector.",
+    "output": "business"
+  }
+]

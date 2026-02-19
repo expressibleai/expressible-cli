@@ -1,0 +1,82 @@
+[
+  {
+    "input": "I signed up for the free trial and was charged $29.99 on day one. The landing page clearly said no charge until the trial ends. I want my money back.",
+    "output": "billing"
+  },
+  {
+    "input": "Our finance team needs a consolidated invoice for all five of our team seats. Right now we're getting separate invoices for each user which is a nightmare for bookkeeping.",
+    "output": "billing"
+  },
+  {
+    "input": "I see a charge labeled 'platform fee' on my latest statement that I've never seen before. What is this and why wasn't I notified about a new fee?",
+    "output": "billing"
+  },
+  {
+    "input": "We need to update our billing entity from our US subsidiary to our UK parent company. VAT number and address both need to change. Who handles that?",
+    "output": "billing"
+  },
+  {
+    "input": "Why am I being charged a shipping surcharge of $14.99 on my invoice? The product page said free shipping on orders over $50 and mine was $73.",
+    "output": "billing"
+  },
+  {
+    "input": "After the latest update the calendar widget overlaps with the sidebar on screens under 1400px wide. Makes it impossible to click anything underneath it.",
+    "output": "technical"
+  },
+  {
+    "input": "OAuth2 callback is returning a 403 after we rotated our client secret. We followed the docs exactly. The old secret was revoked so rolling back isn't an option.",
+    "output": "technical"
+  },
+  {
+    "input": "Keyboard shortcuts stopped working entirely in the editor. Ctrl+S, Ctrl+Z, none of them respond. Mouse-based actions still work. macOS Sonoma, Safari 17.",
+    "output": "technical"
+  },
+  {
+    "input": "The data visualization charts render correctly on first load but if I change the date range filter, the chart goes blank and the console shows a TypeError.",
+    "output": "technical"
+  },
+  {
+    "input": "Audio in the video conferencing feature cuts out every 10-15 seconds for about 2 seconds then comes back. Video is fine. Happens on both Wi-Fi and ethernet.",
+    "output": "technical"
+  },
+  {
+    "input": "I left the company six months ago and my old employer says they can still see my personal documents that were in the shared workspace. Please remove my data from their tenant.",
+    "output": "account"
+  },
+  {
+    "input": "I'm locked out after too many failed login attempts. I remember my password now -- I had caps lock on. How long is the lockout period or can you lift it?",
+    "output": "account"
+  },
+  {
+    "input": "We need to set up SSO through Okta for our organization. Where do I find the SAML configuration details for your platform?",
+    "output": "account"
+  },
+  {
+    "input": "I accidentally accepted an invite to the wrong team and now I can see their projects. I shouldn't have access to this. Please remove me from the DataOps team.",
+    "output": "account"
+  },
+  {
+    "input": "My display name has a typo that I set during onboarding and I can't find where to edit it. The settings page only lets me change my email and password.",
+    "output": "account"
+  },
+  {
+    "input": "I placed my order a week ago and it still says 'processing.' Every other time it shipped within two days. Is something wrong or is it out of stock?",
+    "output": "shipping"
+  },
+  {
+    "input": "The delivery driver left my package in the rain outside my apartment building instead of using the secure locker. Everything inside is soaked.",
+    "output": "shipping"
+  },
+  {
+    "input": "I moved to a new state last week. Can you update the default shipping address on my account so future orders go to the right place? I already updated billing.",
+    "output": "shipping"
+  },
+  {
+    "input": "I was sent a used or refurbished item when I paid for new. The box had been opened before and there are scratches on the product. Order #78234.",
+    "output": "shipping"
+  },
+  {
+    "input": "My order was split into three separate shipments and I was charged shipping on each one. I should only pay shipping once since it was one order.",
+    "output": "billing"
+  }
+]

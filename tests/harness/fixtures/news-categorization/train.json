@@ -1,0 +1,202 @@
+[
+  {
+    "input": "Biden Signs Sweeping Climate Legislation Into Law. The president signed a landmark bill committing $400 billion to renewable energy subsidies and carbon emission reduction targets over the next decade.",
+    "output": "politics"
+  },
+  {
+    "input": "Senate Confirms New Supreme Court Justice in Narrow 51-49 Vote. The confirmation caps a contentious months-long process marked by heated committee hearings and partisan debate.",
+    "output": "politics"
+  },
+  {
+    "input": "NATO Allies Agree to Boost Defense Spending Amid Rising Tensions. Member nations pledged to exceed the 2% GDP defense spending target following an emergency summit in Brussels.",
+    "output": "politics"
+  },
+  {
+    "input": "Midterm Election Results Flip Control of the House. Voters in key swing districts shifted the balance of power, giving the opposition party a narrow majority in the lower chamber.",
+    "output": "politics"
+  },
+  {
+    "input": "Governor Signs Bill Banning TikTok on State Government Devices. The executive order extends to all state employees and contractors, citing national security concerns over data collection practices.",
+    "output": "politics"
+  },
+  {
+    "input": "U.S. and China Resume Trade Talks After Six-Month Freeze. Diplomats from both nations met in Geneva to discuss tariff reductions and intellectual property protections in a bid to stabilize bilateral relations.",
+    "output": "politics"
+  },
+  {
+    "input": "New Voting Rights Act Clears Congressional Committee. The bipartisan bill aims to restore provisions struck down by the Supreme Court and expand early voting access nationwide.",
+    "output": "politics"
+  },
+  {
+    "input": "Prime Minister Faces No-Confidence Vote Over Housing Crisis. Opposition leaders argue the government has failed to address skyrocketing rents and a chronic shortage of affordable housing.",
+    "output": "politics"
+  },
+  {
+    "input": "Federal Reserve Chair Testifies Before Congress on Interest Rate Policy. Lawmakers pressed the central bank leader on the pace of rate hikes and their impact on mortgage affordability and small business lending.",
+    "output": "politics"
+  },
+  {
+    "input": "State Department Announces New Sanctions on Russian Oligarchs. The sanctions target assets worth an estimated $12 billion and aim to increase pressure over the ongoing conflict in Eastern Europe.",
+    "output": "politics"
+  },
+  {
+    "input": "Warriors Defeat Celtics 112-108 in Overtime Thriller. Stephen Curry scored 41 points, including a clutch three-pointer in the final seconds of regulation to force extra time.",
+    "output": "sports"
+  },
+  {
+    "input": "Mbappé Completes Record-Breaking Transfer to Real Madrid. The French striker signed a five-year deal reportedly worth over $250 million, making it the most expensive transfer in football history.",
+    "output": "sports"
+  },
+  {
+    "input": "Djokovic Wins 25th Grand Slam Title at Australian Open. The Serbian tennis star defeated Carlos Alcaraz in a five-set final to extend his record at Melbourne Park.",
+    "output": "sports"
+  },
+  {
+    "input": "Kansas City Chiefs Clinch Third Super Bowl in Five Years. Patrick Mahomes threw for 330 yards and three touchdowns in a dominant performance against the Philadelphia Eagles.",
+    "output": "sports"
+  },
+  {
+    "input": "Olympic Committee Announces 2036 Games Will Be Held in India. The decision makes India the first South Asian nation to host the Summer Olympics, with events planned across Mumbai and New Delhi.",
+    "output": "sports"
+  },
+  {
+    "input": "Shohei Ohtani Hits 60th Home Run, Breaks AL Season Record. The two-way star reached the milestone in September, surpassing a mark that had stood for over two decades.",
+    "output": "sports"
+  },
+  {
+    "input": "Manchester City Banned From Champions League Over Financial Violations. UEFA's independent panel found the club guilty of breaching financial fair play rules across multiple seasons.",
+    "output": "sports"
+  },
+  {
+    "input": "WNBA Viewership Surges 150% as Expansion Teams Join League. The addition of franchises in Toronto and Portland has driven record television ratings and arena attendance figures.",
+    "output": "sports"
+  },
+  {
+    "input": "World Cup Qualifying: Japan Stuns Brazil With 3-1 Victory. A dominant second-half display propelled Japan to a historic win in Sao Paulo, throwing Group B wide open.",
+    "output": "sports"
+  },
+  {
+    "input": "Tiger Woods Announces Retirement From Professional Golf. The 15-time major champion cited persistent injuries and said he wants to focus on course design and mentoring young players.",
+    "output": "sports"
+  },
+  {
+    "input": "Apple Unveils Mixed-Reality Headset at Annual Developer Conference. The Vision Pro 2 features improved display resolution, a lighter form factor, and a new spatial computing operating system.",
+    "output": "technology"
+  },
+  {
+    "input": "OpenAI Raises $10 Billion in Largest AI Funding Round Ever. The investment values the ChatGPT maker at $120 billion and will fund development of next-generation language models.",
+    "output": "technology"
+  },
+  {
+    "input": "Major Ransomware Attack Shuts Down Hospital Networks Across Three States. Cybersecurity officials say the breach compromised patient records and forced emergency rooms to divert ambulances for over 48 hours.",
+    "output": "technology"
+  },
+  {
+    "input": "Google DeepMind AI System Discovers New Antibiotic Compound. The model screened millions of molecular structures and identified a candidate effective against drug-resistant bacteria in lab tests.",
+    "output": "technology"
+  },
+  {
+    "input": "SpaceX Successfully Launches First Crewed Mission to Mars Orbit. The Starship vehicle carried a crew of six on a nine-month journey that marks the farthest humans have traveled from Earth.",
+    "output": "technology"
+  },
+  {
+    "input": "EU Passes Comprehensive AI Regulation Act. The legislation establishes risk-based classifications for AI systems and imposes strict transparency requirements on foundation model developers.",
+    "output": "technology"
+  },
+  {
+    "input": "Samsung Reveals Foldable Laptop With Rollable OLED Display. The prototype can expand from a 13-inch screen to a 17-inch display, targeting professionals who need portability and screen space.",
+    "output": "technology"
+  },
+  {
+    "input": "Startup Uses CRISPR Gene Editing to Develop Allergy-Free Peanuts. The biotech firm announced successful field trials and expects regulatory approval within two years.",
+    "output": "technology"
+  },
+  {
+    "input": "Zero-Day Vulnerability Found in Popular Password Manager Affects 30 Million Users. Security researchers disclosed the flaw after the company failed to patch it within the standard 90-day window.",
+    "output": "technology"
+  },
+  {
+    "input": "Quantum Computing Startup Achieves Error Correction Milestone. The company demonstrated a logical qubit with error rates low enough for practical computation, a long-sought goal in the field.",
+    "output": "technology"
+  },
+  {
+    "input": "Dune: Part Three Breaks Opening Weekend Box Office Records. Denis Villeneuve's sci-fi epic earned $215 million domestically in its first three days, surpassing all previous March releases.",
+    "output": "entertainment"
+  },
+  {
+    "input": "Beyoncé Announces Worldwide Stadium Tour for 2026. The 58-date tour will span five continents and feature an immersive stage design with holographic elements.",
+    "output": "entertainment"
+  },
+  {
+    "input": "Netflix Lands Global Rights to New Studio Ghibli Series. The streaming platform will exclusively distribute the first television series produced by the legendary Japanese animation studio.",
+    "output": "entertainment"
+  },
+  {
+    "input": "Oscar Nominations Announced: 'The Brutalist' Leads With 12 Nods. Brady Corbet's ambitious drama earned nominations across all major categories including Best Picture, Director, and Actor.",
+    "output": "entertainment"
+  },
+  {
+    "input": "Taylor Swift's New Album Sells 3 Million Copies in First Week. 'Midnight Garden' set a new record for first-week sales in the streaming era, powered by vinyl and CD purchases.",
+    "output": "entertainment"
+  },
+  {
+    "input": "HBO Greenlights Game of Thrones Animated Series Set in Valyria. The show will explore the rise of the dragonlord families centuries before the events of the original series.",
+    "output": "entertainment"
+  },
+  {
+    "input": "BTS Member J-Hope Completes Military Service, Announces Solo World Tour. Fans worldwide celebrated his return, crashing multiple ticketing websites within minutes of the tour announcement.",
+    "output": "entertainment"
+  },
+  {
+    "input": "Cannes Film Festival Awards Palme d'Or to First-Time Director. The Brazilian filmmaker's debut feature about climate refugees in the Amazon drew unanimous praise from the jury.",
+    "output": "entertainment"
+  },
+  {
+    "input": "Broadway Revival of 'West Side Story' Starring Bad Bunny Sells Out Through 2027. The unconventional casting choice has generated both excitement and debate across theater circles.",
+    "output": "entertainment"
+  },
+  {
+    "input": "Legendary Filmmaker Martin Scorsese to Direct Final Film at Age 83. The project reunites him with Leonardo DiCaprio for a story set during the 1977 New York City blackout.",
+    "output": "entertainment"
+  },
+  {
+    "input": "Amazon Reports Record Q4 Earnings, Cloud Revenue Up 35%. AWS growth outpaced expectations as enterprise customers accelerated AI workload migration to the cloud platform.",
+    "output": "business"
+  },
+  {
+    "input": "Disney and Comcast Reach $45 Billion Deal for Hulu Stake. The acquisition gives Disney full ownership of the streaming service and consolidates its position in the direct-to-consumer market.",
+    "output": "business"
+  },
+  {
+    "input": "U.S. Unemployment Falls to 3.2%, Lowest in Five Decades. The Bureau of Labor Statistics reported 340,000 new jobs added in January, far exceeding analyst forecasts.",
+    "output": "business"
+  },
+  {
+    "input": "JPMorgan Acquires Regional Bank in Largest Deal Since 2008 Crisis. The $18 billion purchase adds 1,200 branches across the Midwest and strengthens the bank's retail deposit base.",
+    "output": "business"
+  },
+  {
+    "input": "Oil Prices Surge Past $100 as OPEC Extends Production Cuts. Brent crude hit its highest level in two years after the cartel announced deeper supply restrictions through year-end.",
+    "output": "business"
+  },
+  {
+    "input": "Tesla Reports First Annual Decline in Vehicle Deliveries. The EV maker shipped 1.7 million cars in the fiscal year, down 6% from the prior year, as competition in China intensified.",
+    "output": "business"
+  },
+  {
+    "input": "Starbucks Closes 200 U.S. Stores Amid Shifting Consumer Habits. The coffee chain cited declining foot traffic in urban cores and a strategic pivot toward drive-through and delivery-focused locations.",
+    "output": "business"
+  },
+  {
+    "input": "Federal Reserve Cuts Interest Rates for First Time in Four Years. The quarter-point reduction signals the central bank's confidence that inflation is trending toward its 2% target.",
+    "output": "business"
+  },
+  {
+    "input": "Walmart Overtakes Amazon as Top U.S. E-Commerce Retailer by Volume. The shift was driven by Walmart's aggressive grocery delivery expansion and same-day fulfillment capabilities.",
+    "output": "business"
+  },
+  {
+    "input": "Global Semiconductor Shortage Eases as New Fabs Come Online. TSMC and Intel both reported increased output from facilities in Arizona and Ohio, helping stabilize chip supply chains.",
+    "output": "business"
+  }
+]

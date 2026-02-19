@@ -153,6 +153,21 @@ Everything.
 
 ---
 
+### Benchmarks
+
+Measured on held-out test data the model has never seen, with 50 training samples per scenario:
+
+| Scenario | Accuracy |
+|---|---|
+| Content moderation (safe / offensive / spam) | 95.0% |
+| Support ticket routing (billing / technical / account / shipping) | 90.0% |
+| News categorization (politics / sports / tech / entertainment / business) | 84.0% |
+| Sentiment analysis (positive / negative / neutral) | 65.0% |
+
+Full results, methodology, and instructions for running the test harness: **[docs/benchmarks.md](docs/benchmarks.md)**
+
+---
+
 ### Built for Environments Where Data Stays Internal
 
 - Healthcare teams handling patient records
