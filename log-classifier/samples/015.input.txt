@@ -1,0 +1,1 @@
+2024-03-15 10:31:00 WARN [auth-service] Privilege escalation attempt: user viewer@company.com tried to access /admin/users/delete with role VIEWER

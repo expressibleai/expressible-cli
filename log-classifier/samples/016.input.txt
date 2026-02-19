@@ -1,0 +1,1 @@
+2024-03-15 10:31:30 ALERT [ssh] Accepted publickey for root from 45.33.32.156 port 48290 - IP not in allowed bastion host list

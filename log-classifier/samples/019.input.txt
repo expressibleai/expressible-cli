@@ -1,0 +1,1 @@
+2024-03-15 10:33:00 WARN [load-balancer] Backend server node-3 health check response time degraded to 2800ms (threshold: 500ms), marking as unhealthy

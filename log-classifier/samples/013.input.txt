@@ -1,0 +1,1 @@
+2024-03-15 10:30:00 WARN [auth-service] 47 failed login attempts for user admin@company.com from IP 203.0.113.42 in the last 5 minutes

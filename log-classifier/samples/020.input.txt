@@ -1,0 +1,1 @@
+2024-03-15 10:33:30 WARN [gc-monitor] JVM garbage collection pause: 3400ms full GC, heap usage 94%. Application threads were stopped for 3.4 seconds.

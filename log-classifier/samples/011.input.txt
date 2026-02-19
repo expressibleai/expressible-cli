@@ -1,0 +1,1 @@
+2024-03-15 10:29:00 ERROR [worker-3] Unhandled exception in job queue processor: TypeError: Cannot read properties of null (reading 'userId') at processOrder.js:142

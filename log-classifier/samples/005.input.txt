@@ -1,0 +1,1 @@
+2024-03-15 10:26:12 WARN [db-pool] Connection pool utilization at 85% (17/20 connections in use)

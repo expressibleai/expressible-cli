@@ -1,0 +1,1 @@
+2024-03-15 10:24:01 INFO [scheduler] Cron job daily-cleanup started successfully

@@ -1,0 +1,1 @@
+2024-03-15 10:26:30 WARN [disk-monitor] Disk usage on /var/log reached 78%, threshold is 80%

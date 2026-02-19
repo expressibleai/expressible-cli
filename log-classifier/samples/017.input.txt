@@ -1,0 +1,1 @@
+2024-03-15 10:32:00 WARN [web-server] Request latency spike: GET /api/reports/quarterly averaged 4200ms over last 60 seconds (baseline: 250ms)
