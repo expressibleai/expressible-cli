@@ -1,1 +1,0 @@
-2024-03-15 10:29:30 FATAL [app] Out of memory: heap allocation failed - requested 524288000 bytes. Process will restart.

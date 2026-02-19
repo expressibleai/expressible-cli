@@ -1,1 +1,0 @@
-2024-03-15 10:24:15 INFO [auth-service] User john.doe@company.com logged in from 192.168.1.50

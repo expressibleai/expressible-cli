@@ -6,6 +6,9 @@ dist/
 # Test artifacts
 my-task/
 sentiment-classifier/
+legal-clauses/
+log-classifier/
+create-samples.sh
 
 # OS files
 .DS_Store

@@ -1,1 +1,0 @@
-2024-03-15 10:25:00 DEBUG [cache] Cache hit for key session:abc123, TTL remaining 1800s

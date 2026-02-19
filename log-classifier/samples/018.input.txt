@@ -1,1 +1,0 @@
-2024-03-15 10:32:30 WARN [db] Slow query detected: SELECT * FROM orders JOIN line_items ON orders.id = line_items.order_id WHERE created_at > ... took 12.4 seconds, rows examined: 2847000
