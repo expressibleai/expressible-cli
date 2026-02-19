@@ -71,7 +71,7 @@ function generateInferenceScript(isClassifier: boolean, taskType: string): strin
 import tf from '@tensorflow/tfjs-node';
 import { pipeline, env } from '@xenova/transformers';
 import { readFileSync } from 'fs';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 import { dirname, join } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -96,7 +96,7 @@ async function main() {
   const embedding = result.tolist()[0];
 
   // Load trained model
-  const model = await tf.loadLayersModel('file://' + join(__dirname, 'model.json'));
+  const model = await tf.loadLayersModel(pathToFileURL(join(__dirname, 'model.json')).toString());
 
   // Predict
   const inputTensor = tf.tensor2d([embedding]);

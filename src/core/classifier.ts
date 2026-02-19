@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { getModelDir, ensureDir } from '../utils/paths.js';
 import { EMBEDDING_DIM } from './embeddings.js';
 import { loadTf } from './tf.js';
@@ -150,7 +151,7 @@ export async function trainClassifier(
   const modelDir = getModelDir(taskDir);
   ensureDir(modelDir);
 
-  const modelPath = `file://${modelDir}`;
+  const modelPath = pathToFileURL(modelDir).toString();
   await model.save(modelPath);
 
   // Save metadata
@@ -207,7 +208,7 @@ export async function predict(
     fs.readFileSync(metadataPath, 'utf-8')
   );
 
-  const modelPath = `file://${path.join(modelDir, 'model.json')}`;
+  const modelPath = pathToFileURL(path.join(modelDir, 'model.json')).toString();
   const model = await tf.loadLayersModel(modelPath);
 
   const inputTensor = tf.tensor2d([embedding]);
