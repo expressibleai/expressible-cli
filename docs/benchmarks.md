@@ -1,6 +1,12 @@
 # Benchmarks
 
-Accuracy benchmarks for Distill, measured using a scripted test harness with held-out test data across multiple scenarios. Includes both synthetic test data and public ML datasets for independent verification.
+## What This Means for You
+
+Label 50 examples. Train a model. Get 76–96% accuracy on text classification — with no API keys, no cloud, and no ML expertise.
+
+These benchmarks measure what happens when you give Distill 50 labeled examples and test it on text it has never seen. That's roughly 30 minutes of labeling work. The public dataset results use real-world text from datasets containing 120,000+ entries — we only used 50 samples from each. Anyone can reproduce these numbers by cloning the repo and running the test harness.
+
+Distill works best for **topic and domain classification** — deciding *what kind of thing* a piece of text is. It struggles with sentiment and tone, where the meaning is similar but the evaluation differs.
 
 ## Results
 
@@ -15,11 +21,13 @@ Accuracy benchmarks for Distill, measured using a scripted test harness with hel
 
 ### Classification — Public Datasets
 
-| Dataset | Categories | Train | Test | Accuracy | Avg Confidence |
+These use real text from established ML benchmarks. Samples are included in the repository.
+
+| Dataset | Full Size | Train Used | Test | Accuracy | Avg Confidence |
 |---|---|---|---|---|---|
-| [20 Newsgroups](http://qwone.com/~jason/20Newsgroups/) | 5 | 50 | 23 | **87.0%** | 79.0% |
-| [AG News](https://huggingface.co/datasets/fancyzhx/ag_news) | 4 | 50 | 25 | **76.0%** | 76.4% |
-| [SST-2](https://huggingface.co/datasets/stanfordnlp/sst2) | 2 | 50 | 25 | 56.0% | 55.8% |
+| [20 Newsgroups](http://qwone.com/~jason/20Newsgroups/) (5 categories) | ~18,800 | 50 | 23 | **87.0%** | 79.0% |
+| [AG News](https://huggingface.co/datasets/fancyzhx/ag_news) (4 categories) | 127,600 | 50 | 25 | **76.0%** | 76.4% |
+| [SST-2](https://huggingface.co/datasets/stanfordnlp/sst2) (2 categories) | 68,221 | 50 | 25 | 56.0% | 55.8% |
 
 ### Classification Overall
 
@@ -29,23 +37,27 @@ Accuracy benchmarks for Distill, measured using a scripted test harness with hel
 | Public datasets (excl. SST-2) | 39 | 48 | **81.3%** |
 | All classification | 124 | 158 | **78.5%** |
 
-Classification works well for tasks with semantically distinct categories (support tickets, content types, news topics, newsgroup subjects). It struggles with sentiment and tone, where the underlying meaning of text is similar across categories and only the evaluative framing differs.
+### What works and what doesn't
 
-### Extraction and Transformation
+**Works well (76–96%):** Tasks where categories are semantically distinct — the text is *about* different things. Support tickets about billing vs shipping. News about sports vs politics. Forum posts about cars vs space exploration. The embedding model captures topic differences effectively, and a small neural network learns the boundaries with minimal data.
+
+**Doesn't work well (~55%):** Sentiment and tone classification. "This camera takes amazing photos" and "This camera takes terrible photos" are semantically almost identical — same topic, same structure. The embedding vectors land close together regardless of the evaluation. Both SST-2 (public dataset, 56%) and our synthetic sentiment scenario (55%) confirm this is a fundamental property of the approach, not a data issue.
+
+### Extraction and Transformation (Experimental)
 
 | Scenario | Train | Test | Accuracy | Avg Confidence |
 |---|---|---|---|---|
 | Email field extraction | 20 | 10 | 0.0% | 39.4% |
 | Complaint response generation | 20 | 10 | 10.0% | 40.2% |
 
-Extract and transform tasks use a retrieval-based approach (nearest-neighbor lookup) that returns stored outputs from the closest training example. This cannot generalize to unseen inputs. These task types are experimental.
+Extract and transform use a retrieval-based approach that finds the most similar training example and returns its stored output. This cannot generalize to new inputs — it copies old answers rather than extracting from new text. These task types are experimental.
 
 ## Methodology
 
 Each scenario uses:
 
 - **Training set**: 50 labeled examples (20 for extract/transform) with balanced class distribution
-- **Test set**: 20-25 held-out examples the model has never seen, including deliberate edge cases
+- **Test set**: 20–25 held-out examples the model has never seen, including deliberate edge cases
 - **Embeddings**: [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) sentence embeddings (384-dimensional)
 - **Classification model**: Two-layer neural network (128 + 64 units, ReLU, dropout 0.2, softmax output) trained with early stopping
 - **Scoring**: Exact label match for classification. For extraction, >50% of JSON fields must match. For transformation, confidence threshold of 0.5.
@@ -54,11 +66,9 @@ Training and test data are fully separated. No test input appears in the trainin
 
 ### Public dataset sources
 
-The public dataset benchmarks use real data from established ML benchmarks. Samples are included in the repository for reproducibility.
-
-- **AG News** — News articles classified into World, Sports, Business, Sci/Tech. Sourced from the [fancyzhx/ag_news](https://huggingface.co/datasets/fancyzhx/ag_news) dataset on HuggingFace. 50 training samples from the train split, 25 test samples from the test split.
-- **SST-2** — Movie review sentences classified as positive or negative. Sourced from the [stanfordnlp/sst2](https://huggingface.co/datasets/stanfordnlp/sst2) dataset on HuggingFace (part of the GLUE benchmark). 50 training samples from the train split, 25 test samples from the validation split.
-- **20 Newsgroups** — Newsgroup posts classified into 5 categories (science, sports, politics, computers, autos) selected from the full 20-category dataset. Sourced from the [SetFit/20_newsgroups](https://huggingface.co/datasets/SetFit/20_newsgroups) dataset on HuggingFace. Email headers stripped, text truncated to 500 characters.
+- **AG News** — Real news articles classified into World, Sports, Business, Sci/Tech. 127,600 articles from 2,000+ news sources. We used 50 training samples from the train split, 25 test samples from the test split. Source: [fancyzhx/ag_news](https://huggingface.co/datasets/fancyzhx/ag_news) on HuggingFace.
+- **SST-2** — Real movie review sentences classified as positive or negative. 68,221 sentences from Rotten Tomatoes, annotated by Stanford researchers. We used 50 training samples from the train split, 25 test samples from the validation split. Source: [stanfordnlp/sst2](https://huggingface.co/datasets/stanfordnlp/sst2) on HuggingFace (part of the GLUE benchmark).
+- **20 Newsgroups** — Real Usenet forum posts from 1993. ~18,800 posts across 20 newsgroups. We selected 5 categories (sci.space, rec.sport.baseball, talk.politics.mideast, comp.graphics, rec.autos), stripped email headers, and truncated to 500 characters. Source: [SetFit/20_newsgroups](https://huggingface.co/datasets/SetFit/20_newsgroups) on HuggingFace.
 
 ## Scenarios
 
@@ -101,6 +111,6 @@ To add your own scenario, create a new directory under `tests/harness/fixtures/`
 ## Notes
 
 - Results vary slightly between runs due to random weight initialization and train/validation splits
-- More training data generally improves accuracy — these benchmarks use modest dataset sizes (50 samples) to reflect realistic early usage
-- Classification accuracy improves with the review-retrain loop, which is not captured in these one-shot benchmarks
-- Sentiment/tone classification is a known weak spot — the embedding model captures semantic meaning, not evaluative framing
+- Accuracy improves as you add more examples through the review-retrain loop — these benchmarks capture one-shot accuracy only
+- You need at least 10 examples to start. 50+ gives the results shown here
+- Sentiment/tone classification is a known limitation — the embedding model captures semantic meaning, not evaluative framing

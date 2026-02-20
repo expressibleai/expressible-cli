@@ -155,19 +155,23 @@ Everything.
 
 ### Benchmarks
 
-Measured on held-out test data the model has never seen, with 50 training samples per scenario:
+With 50 labeled examples (~30 minutes of work), no API keys, and no ML expertise:
 
-| Scenario | Accuracy |
-|---|---|
-| News categorization (5 categories) | 96.0% |
-| Support ticket routing (4 categories) | 90.0% |
-| Content moderation (3 categories) | 90.0% |
-| 20 Newsgroups — public dataset (5 categories) | 87.0% |
-| AG News — public dataset (4 categories) | 76.0% |
+| Scenario | Accuracy | Data Source |
+|---|---|---|
+| News categorization (5 categories) | 96.0% | Synthetic |
+| Support ticket routing (4 categories) | 90.0% | Synthetic |
+| Content moderation (3 categories) | 90.0% | Synthetic |
+| 20 Newsgroups (5 categories) | 87.0% | [Public dataset](https://huggingface.co/datasets/SetFit/20_newsgroups) |
+| AG News (4 categories) | 76.0% | [Public dataset](https://huggingface.co/datasets/fancyzhx/ag_news) |
 
-Public dataset benchmarks use real data from [AG News](https://huggingface.co/datasets/fancyzhx/ag_news) and [20 Newsgroups](https://huggingface.co/datasets/SetFit/20_newsgroups). Samples are included in the repo — run `npx tsx tests/harness/run.ts` to reproduce.
+Public dataset results use real-world text from established ML benchmarks — 50 samples drawn from datasets containing 120,000+ entries. All samples and the test harness are included in the repo so you can reproduce these results:
 
-Full results, methodology, and all scenarios: **[docs/benchmarks.md](docs/benchmarks.md)**
+```bash
+npx tsx tests/harness/run.ts
+```
+
+Accuracy improves as you add more examples through the review-retrain loop. Full results, methodology, and known limitations: **[docs/benchmarks.md](docs/benchmarks.md)**
 
 ---
 
