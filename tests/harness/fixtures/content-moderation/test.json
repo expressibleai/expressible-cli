@@ -1,0 +1,82 @@
+[
+  {
+    "input": "I strongly disagree with this terrible take. The reasoning is flawed and the conclusion doesn't follow from the evidence at all.",
+    "output": "safe"
+  },
+  {
+    "input": "This is absolutely infuriating. The airline lost my luggage for the third time this year. Can anyone recommend a better carrier?",
+    "output": "safe"
+  },
+  {
+    "input": "Check out my new blog post about cooking Italian food from scratch. I spent all weekend perfecting the sauce.",
+    "output": "safe"
+  },
+  {
+    "input": "That play was the worst thing I've ever seen on stage. Total waste of money and two hours of my life I'll never get back.",
+    "output": "safe"
+  },
+  {
+    "input": "Would anyone be interested in a study group for the upcoming biology exam? I'm struggling with the genetics unit.",
+    "output": "safe"
+  },
+  {
+    "input": "I'm so frustrated with this project. Nothing works and the documentation is garbage. But I'll figure it out eventually.",
+    "output": "safe"
+  },
+  {
+    "input": "My grandmother's funeral was yesterday. Thank you all for the kind messages, it really means a lot during this difficult time.",
+    "output": "safe"
+  },
+  {
+    "input": "You must have the IQ of a brick wall. Every single thing you post makes the rest of us dumber for having read it.",
+    "output": "offensive"
+  },
+  {
+    "input": "Of course someone like you would say that. Your kind always sticks together defending nonsense.",
+    "output": "offensive"
+  },
+  {
+    "input": "Do the world a favor and delete your account. Nobody would notice or care if you disappeared from here.",
+    "output": "offensive"
+  },
+  {
+    "input": "Wow, another brilliant contribution from the village fool. Keep talking so we can all keep laughing at you.",
+    "output": "offensive"
+  },
+  {
+    "input": "You're a joke and so is anyone who agrees with you. Absolute bottom of the barrel, the lot of you.",
+    "output": "offensive"
+  },
+  {
+    "input": "Maybe if you spent less time running your mouth and more time using your brain, you wouldn't embarrass yourself so often.",
+    "output": "offensive"
+  },
+  {
+    "input": "No one in their right mind would ever listen to you. You're the kind of person that makes everyone leave the room.",
+    "output": "offensive"
+  },
+  {
+    "input": "Double your Bitcoin in 24 hours! Send 0.1 BTC to our wallet and receive 0.2 BTC back. Details at http://example.com/btc-double",
+    "output": "spam"
+  },
+  {
+    "input": "Congratulations! You are visitor number 1,000,000! Click http://example.com/prize-claim to collect your $1,000 Amazon gift card NOW!",
+    "output": "spam"
+  },
+  {
+    "input": "Looking for a girlfriend? Hot singles in your area are waiting! Sign up free at http://example.com/date-now. No subscription needed!",
+    "output": "spam"
+  },
+  {
+    "input": "I quit my 9-to-5 thanks to this passive income method. Watch the free training at http://example.com/quit-your-job before they take it down!",
+    "output": "spam"
+  },
+  {
+    "input": "Get 10,000 Instagram followers overnight! Real accounts, real engagement. Order at http://example.com/insta-growth. Use code BOOST for 20% off!",
+    "output": "spam"
+  },
+  {
+    "input": "URGENT: We detected unusual activity on your bank account. Confirm your details at http://example.com/bank-verify to prevent your account from being locked.",
+    "output": "spam"
+  }
+]

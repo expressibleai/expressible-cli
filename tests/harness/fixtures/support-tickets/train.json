@@ -1,0 +1,206 @@
+[
+  {
+    "input": "I was charged twice for my order #8841. I only placed one order and my credit card shows two identical charges of $49.99. Please refund the duplicate.",
+    "output": "billing"
+  },
+  {
+    "input": "Can you explain the price increase on my monthly plan? I was paying $12/month and now it says $18. Nobody told me about this.",
+    "output": "billing"
+  },
+  {
+    "input": "I need a refund for the annual subscription I purchased yesterday. I didn't realize it was non-refundable but I literally bought it 16 hours ago.",
+    "output": "billing"
+  },
+  {
+    "input": "Where is my invoice for January? I need it for tax purposes and it's not showing up in my billing portal like it usually does.",
+    "output": "billing"
+  },
+  {
+    "input": "I want to downgrade from the Pro plan to Basic. How do I do that and will I get a prorated refund for the rest of the billing cycle?",
+    "output": "billing"
+  },
+  {
+    "input": "Your system charged my expired card somehow and now my bank is hitting me with an overdraft fee. This is unacceptable. I want the charge reversed AND the overdraft fee covered.",
+    "output": "billing"
+  },
+  {
+    "input": "Hi, quick question -- do you offer student discounts? I'm a full-time university student and the current pricing is a bit steep for me.",
+    "output": "billing"
+  },
+  {
+    "input": "My coupon code SAVE20 isn't working at checkout. It says it's invalid but I just received it in your promotional email this morning.",
+    "output": "billing"
+  },
+  {
+    "input": "I cancelled my subscription two months ago but I'm still being charged. This is the third time I've contacted you about this. Fix it now or I'm disputing with my bank.",
+    "output": "billing"
+  },
+  {
+    "input": "Can I switch my billing from monthly to annual? I'd like to take advantage of the yearly discount if it's still available.",
+    "output": "billing"
+  },
+  {
+    "input": "I was charged sales tax but I'm a tax-exempt organization. Our exemption certificate is on file. Please adjust the invoice.",
+    "output": "billing"
+  },
+  {
+    "input": "The payment method update page keeps rejecting my new Visa card. The card works fine everywhere else. Can you update it on your end?",
+    "output": "billing"
+  },
+  {
+    "input": "Hey, I need to add a second payment method to my account for the team subscription. Is that possible through the dashboard?",
+    "output": "billing"
+  },
+  {
+    "input": "The app crashes every time I try to open the reports dashboard. I'm on iOS 17.2 and it just freezes then closes. Been happening since the last update.",
+    "output": "technical"
+  },
+  {
+    "input": "Getting a 500 internal server error when I call the /api/v2/users endpoint. Started about an hour ago. Here's the request ID: req_7fk29xm.",
+    "output": "technical"
+  },
+  {
+    "input": "The search function returns zero results no matter what I type. I know for a fact there are matching records because I can see them in the list view.",
+    "output": "technical"
+  },
+  {
+    "input": "Everything is incredibly slow today. Pages that normally load in 1-2 seconds are taking 15+ seconds. Is there an outage or something?",
+    "output": "technical"
+  },
+  {
+    "input": "I uploaded a CSV file but the import wizard is showing all the data in a single column instead of splitting it into fields. The file is comma-delimited and works in Excel.",
+    "output": "technical"
+  },
+  {
+    "input": "The webhook integration with Slack stopped working after your maintenance window last night. No notifications are coming through at all.",
+    "output": "technical"
+  },
+  {
+    "input": "Bug report: when I set a due date in the task manager and then edit the task description, the due date resets to today's date. Reproducible every time.",
+    "output": "technical"
+  },
+  {
+    "input": "Your mobile app won't sync with the desktop version. I made changes on my phone an hour ago and they're still not showing up on my laptop.",
+    "output": "technical"
+  },
+  {
+    "input": "I keep getting a \"session expired\" error every 5 minutes even though I just logged in. It's making the platform unusable. Chrome 120 on Windows 11.",
+    "output": "technical"
+  },
+  {
+    "input": "PDF export is broken. The generated file is blank -- 0 bytes. Tried three different reports, same result every time.",
+    "output": "technical"
+  },
+  {
+    "input": "The drag-and-drop feature in the kanban board doesn't work on Firefox. Cards just snap back to their original position. Works fine on Chrome though.",
+    "output": "technical"
+  },
+  {
+    "input": "API rate limit seems wrong. Docs say 1000 requests/min but I'm getting throttled at around 200. My API key is on the Business tier.",
+    "output": "technical"
+  },
+  {
+    "input": "Notifications are duplicated -- I get the same email notification 3-4 times for every single event. Started happening this week.",
+    "output": "technical"
+  },
+  {
+    "input": "I can't log in. I know my password is correct because I just changed it yesterday but it keeps saying invalid credentials.",
+    "output": "account"
+  },
+  {
+    "input": "I need to reset my password but the reset email never arrives. I've checked spam, waited 30 minutes, tried three times. Nothing.",
+    "output": "account"
+  },
+  {
+    "input": "How do I update my company name on my account? We rebranded and I need the new name to show on everything.",
+    "output": "account"
+  },
+  {
+    "input": "Please delete my account and all associated data. I no longer use the service and want my information removed per GDPR.",
+    "output": "account"
+  },
+  {
+    "input": "I'm a team admin but I can't access the user management section. It says I don't have sufficient permissions. My role was definitely set to admin.",
+    "output": "account"
+  },
+  {
+    "input": "I need to transfer ownership of our team account to my colleague. I'm leaving the company next week and she'll be taking over.",
+    "output": "account"
+  },
+  {
+    "input": "Someone seems to have accessed my account. I see login activity from an IP in another country. Please lock my account immediately and help me secure it.",
+    "output": "account"
+  },
+  {
+    "input": "My two-factor authentication isn't working. The codes from my authenticator app are always rejected. I think the time sync might be off.",
+    "output": "account"
+  },
+  {
+    "input": "Can I merge two accounts? I accidentally created a second one with my work email and now my data is split between them.",
+    "output": "account"
+  },
+  {
+    "input": "I want to change the email address on my account from my personal email to my work email. How do I do that without losing any data?",
+    "output": "account"
+  },
+  {
+    "input": "I just joined a new team but the invitation link says it's expired. My manager sent it two days ago. Can you resend it or add me manually?",
+    "output": "account"
+  },
+  {
+    "input": "I need to update my profile photo but the upload button does nothing when I click it. Also want to add my job title to my profile.",
+    "output": "account"
+  },
+  {
+    "input": "Where is my package? Order #33021 was supposed to arrive three days ago and the tracking hasn't updated since it left the warehouse.",
+    "output": "shipping"
+  },
+  {
+    "input": "I received the wrong item. I ordered a blue large hoodie and got a red medium t-shirt. This is really frustrating.",
+    "output": "shipping"
+  },
+  {
+    "input": "My package arrived damaged. The box was crushed and the product inside is cracked. I'd like a replacement sent out ASAP.",
+    "output": "shipping"
+  },
+  {
+    "input": "I need to change the shipping address for order #40892. I just moved and it's going to my old apartment. The order hasn't shipped yet.",
+    "output": "shipping"
+  },
+  {
+    "input": "Do you offer expedited shipping? I need this by Friday for an event and standard shipping says it won't arrive until next Wednesday.",
+    "output": "shipping"
+  },
+  {
+    "input": "The tracking number you gave me says it's not found in the carrier's system. It's been two days since you sent the shipping confirmation. Order #55123.",
+    "output": "shipping"
+  },
+  {
+    "input": "My order was marked as delivered but I never received it. Nobody was home and there's no package at the door or with any neighbors.",
+    "output": "shipping"
+  },
+  {
+    "input": "Can I pick up my order at your warehouse instead of having it shipped? I live nearby and would rather not wait.",
+    "output": "shipping"
+  },
+  {
+    "input": "I ordered two items together but only one arrived. The packing slip shows both items but the box only had the keyboard, not the mouse.",
+    "output": "shipping"
+  },
+  {
+    "input": "What countries do you ship to? I need to send a gift to my friend in New Zealand and I can't find international shipping options at checkout.",
+    "output": "shipping"
+  },
+  {
+    "input": "My package has been sitting at customs for over a week with no movement. Is there anything you can do to help clear it?",
+    "output": "shipping"
+  },
+  {
+    "input": "I need to return an item but the return shipping label you emailed me doesn't work. The QR code won't scan at the post office.",
+    "output": "shipping"
+  },
+  {
+    "input": "Tracking says my order is being returned to sender for some reason. I didn't request a return. What's going on?",
+    "output": "shipping"
+  }
+]

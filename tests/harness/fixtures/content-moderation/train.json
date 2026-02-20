@@ -1,0 +1,202 @@
+[
+  {
+    "input": "Does anyone know a good recipe for sourdough bread? I've been trying to get the crust right but it keeps coming out too soft.",
+    "output": "safe"
+  },
+  {
+    "input": "I just finished reading that book and honestly it was one of the best novels I've read this year. Highly recommend it.",
+    "output": "safe"
+  },
+  {
+    "input": "Can someone help me with my Python homework? I keep getting an index out of range error and I don't understand why.",
+    "output": "safe"
+  },
+  {
+    "input": "The weather here has been absolutely gorgeous this week. Perfect time to go hiking if you're in the area.",
+    "output": "safe"
+  },
+  {
+    "input": "I think the new policy changes are a step in the right direction, but there's still a lot of work to be done.",
+    "output": "safe"
+  },
+  {
+    "input": "Just adopted a rescue dog from the shelter! She's a little nervous but already warming up to us.",
+    "output": "safe"
+  },
+  {
+    "input": "Has anyone tried the new restaurant on Main Street? The reviews are mixed and I'm curious if it's worth going.",
+    "output": "safe"
+  },
+  {
+    "input": "Happy birthday to my best friend! Twenty years of friendship and counting. Here's to many more.",
+    "output": "safe"
+  },
+  {
+    "input": "I disagree with the previous comment. The data clearly shows a different trend if you look at the full dataset.",
+    "output": "safe"
+  },
+  {
+    "input": "Pro tip: if you're learning guitar, start with simple chord progressions before jumping into barre chords. Your fingers will thank you.",
+    "output": "safe"
+  },
+  {
+    "input": "Why do programmers prefer dark mode? Because light attracts bugs. Sorry, I'll see myself out.",
+    "output": "safe"
+  },
+  {
+    "input": "Moving to a new city next month and I'm nervous but excited. Any tips for meeting people in a new place?",
+    "output": "safe"
+  },
+  {
+    "input": "The documentary about ocean conservation was really eye-opening. Everyone should watch it at least once.",
+    "output": "safe"
+  },
+  {
+    "input": "I've been working on this painting for three weeks now. It's not perfect but I'm proud of how far I've come as an artist.",
+    "output": "safe"
+  },
+  {
+    "input": "Quick question: is it better to invest in index funds or individual stocks for long-term growth? I'm new to investing.",
+    "output": "safe"
+  },
+  {
+    "input": "Ran my first 5K today! My time was terrible but honestly I'm just happy I finished without stopping.",
+    "output": "safe"
+  },
+  {
+    "input": "The latest software update broke my printer again. Has anyone figured out a workaround for this?",
+    "output": "safe"
+  },
+  {
+    "input": "I love how this community comes together to help each other out. You all are genuinely wonderful people.",
+    "output": "safe"
+  },
+  {
+    "input": "For anyone wondering, the museum is free on the first Sunday of every month. Great way to spend an afternoon.",
+    "output": "safe"
+  },
+  {
+    "input": "Trying to decide between learning Spanish or Japanese next. Both seem useful but for very different reasons.",
+    "output": "safe"
+  },
+  {
+    "input": "You're an idiot if you actually believe that. Do everyone a favor and stop posting.",
+    "output": "offensive"
+  },
+  {
+    "input": "People like you are the reason this community is going downhill. You ruin everything you touch.",
+    "output": "offensive"
+  },
+  {
+    "input": "Go away, nobody wants you here. Take your garbage opinions somewhere else.",
+    "output": "offensive"
+  },
+  {
+    "input": "Imagine being this stupid and still having the confidence to share your thoughts publicly. Embarrassing.",
+    "output": "offensive"
+  },
+  {
+    "input": "You're worthless and everyone knows it. The only thing you're good at is wasting other people's time.",
+    "output": "offensive"
+  },
+  {
+    "input": "Shut up already. Nobody asked for your opinion and nobody cares what you think.",
+    "output": "offensive"
+  },
+  {
+    "input": "This is the dumbest thing I've ever read. You should be ashamed of yourself for writing this.",
+    "output": "offensive"
+  },
+  {
+    "input": "People from that neighborhood are all the same. Lazy and entitled, every single one of them.",
+    "output": "offensive"
+  },
+  {
+    "input": "You're a complete waste of space. I can't believe they let someone like you have an account here.",
+    "output": "offensive"
+  },
+  {
+    "input": "Why don't you crawl back to whatever hole you came from? Nobody here respects you.",
+    "output": "offensive"
+  },
+  {
+    "input": "Your parents must be so disappointed in you. I know I would be if I raised someone this pathetic.",
+    "output": "offensive"
+  },
+  {
+    "input": "How do you manage to be wrong about literally everything? It's almost impressive how clueless you are.",
+    "output": "offensive"
+  },
+  {
+    "input": "Typical. Another moron who thinks they know better than everyone else. Sit down and be quiet.",
+    "output": "offensive"
+  },
+  {
+    "input": "You don't belong in this conversation. The adults are talking, so why don't you go play somewhere else.",
+    "output": "offensive"
+  },
+  {
+    "input": "I hope you realize how much everyone here despises you. You make this place worse just by showing up.",
+    "output": "offensive"
+  },
+  {
+    "input": "Congratulations! You've been selected to win a FREE iPhone 15! Click here to claim: http://example.com/free-iphone",
+    "output": "spam"
+  },
+  {
+    "input": "I made $5,000 in one week using this simple crypto trading bot. Sign up now at http://example.com/crypto-profits and start earning today!",
+    "output": "spam"
+  },
+  {
+    "input": "ATTENTION: Your account has been compromised. Verify your identity immediately at http://example.com/verify-account to avoid suspension.",
+    "output": "spam"
+  },
+  {
+    "input": "Lose 30 pounds in 30 days with this miracle weight loss supplement! Order now at http://example.com/diet-pills. Limited time offer!!!",
+    "output": "spam"
+  },
+  {
+    "input": "Hey everyone! I found this amazing site where you can get free gift cards. Just complete a quick survey: http://example.com/free-giftcards",
+    "output": "spam"
+  },
+  {
+    "input": "Work from home and earn $500/day! No experience needed. Apply now at http://example.com/easy-money. Spots filling up fast!",
+    "output": "spam"
+  },
+  {
+    "input": "Buy followers, likes, and views for all social media platforms! Cheapest prices guaranteed. Visit http://example.com/buy-followers",
+    "output": "spam"
+  },
+  {
+    "input": "MASSIVE GIVEAWAY! We're giving away 100 PS5 consoles! All you have to do is like, share, and visit http://example.com/ps5-giveaway",
+    "output": "spam"
+  },
+  {
+    "input": "Tired of paying for Netflix? Get FREE unlimited streaming at http://example.com/free-streaming. Works worldwide, no credit card required!",
+    "output": "spam"
+  },
+  {
+    "input": "Invest in our new token $MOONSHOT before it explodes! Early investors are seeing 1000x returns. Join the presale: http://example.com/moonshot-token",
+    "output": "spam"
+  },
+  {
+    "input": "Best SEO services in 2026! Rank #1 on Google guaranteed. Contact us at http://example.com/seo-services. First month FREE!",
+    "output": "spam"
+  },
+  {
+    "input": "Unlock premium features on any app for FREE! Download our modded APK at http://example.com/free-premium. 100% safe and tested!",
+    "output": "spam"
+  },
+  {
+    "input": "Your loan has been pre-approved! Claim your $10,000 personal loan with 0% interest at http://example.com/instant-loan. No credit check!",
+    "output": "spam"
+  },
+  {
+    "input": "I just discovered this AI tool that writes essays for you in seconds. Try it free at http://example.com/ai-writer. Use code SAVE50 for half off!",
+    "output": "spam"
+  },
+  {
+    "input": "Want cheap designer bags, watches, and shoes? Top quality replicas at http://example.com/luxury-deals. Ships worldwide, discreet packaging!",
+    "output": "spam"
+  }
+]

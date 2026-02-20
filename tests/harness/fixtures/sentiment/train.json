@@ -1,0 +1,202 @@
+[
+  {
+    "input": "Absolutely love these wireless earbuds! The noise cancellation is phenomenal and they stay in place during my runs.",
+    "output": "positive"
+  },
+  {
+    "input": "This jacket is incredibly warm without being bulky. Perfect for winter commuting.",
+    "output": "positive"
+  },
+  {
+    "input": "Best coffee beans I've ordered online. Rich flavor, smooth finish, and the freshness is unmatched.",
+    "output": "positive"
+  },
+  {
+    "input": "The project management app has transformed how our team collaborates. Worth every penny of the subscription.",
+    "output": "positive"
+  },
+  {
+    "input": "Five stars for this plumber. Showed up on time, explained everything clearly, and the price was fair.",
+    "output": "positive"
+  },
+  {
+    "input": "I've gone through three keyboards this year and this mechanical one is by far the best. The tactile feedback is so satisfying.",
+    "output": "positive"
+  },
+  {
+    "input": "These running shoes changed my life. Zero blisters after a half marathon.",
+    "output": "positive"
+  },
+  {
+    "input": "The protein bars actually taste good for once. Not chalky, not overly sweet. Just right.",
+    "output": "positive"
+  },
+  {
+    "input": "Switched to this VPN service last month and the speed difference is night and day compared to my old provider. Highly recommend.",
+    "output": "positive"
+  },
+  {
+    "input": "Our wedding photographer was outstanding. She captured moments we didn't even notice happening. Every photo tells a story.",
+    "output": "positive"
+  },
+  {
+    "input": "This portable charger is a game changer for travel. Charged my phone three full times on a single charge.",
+    "output": "positive"
+  },
+  {
+    "input": "Softest bedsheets I've ever owned. I actually look forward to getting into bed now.",
+    "output": "positive"
+  },
+  {
+    "input": "The olive oil from this brand is restaurant quality. Makes a noticeable difference in my cooking.",
+    "output": "positive"
+  },
+  {
+    "input": "This note-taking app syncs flawlessly across all my devices. Finally replaced my paper notebooks for good.",
+    "output": "positive"
+  },
+  {
+    "input": "The movers were careful with every single box. Not a scratch on any furniture. Will use them again for sure.",
+    "output": "positive"
+  },
+  {
+    "input": "Grabbed this monitor on sale and wow, the color accuracy is stunning. My photo editing workflow has improved dramatically.",
+    "output": "positive"
+  },
+  {
+    "input": "These hiking boots needed zero break-in time. Comfortable right out of the box on a 10-mile trail.",
+    "output": "positive"
+  },
+  {
+    "input": "The meal kit service has been a lifesaver for weeknight dinners. Fresh ingredients, easy recipes, and minimal cleanup.",
+    "output": "positive"
+  },
+  {
+    "input": "The tablet stopped turning on after two weeks. Complete waste of money and customer support was useless.",
+    "output": "negative"
+  },
+  {
+    "input": "Ordered a medium sweater and received something that would fit a toddler. The sizing chart is a joke.",
+    "output": "negative"
+  },
+  {
+    "input": "These granola bars taste like sweetened cardboard. Had to throw away the entire box.",
+    "output": "negative"
+  },
+  {
+    "input": "The accounting software crashes every time I try to export reports. Three updates later and the bug is still there.",
+    "output": "negative"
+  },
+  {
+    "input": "Hired a cleaning service and they left my bathroom dirtier than they found it. Never again.",
+    "output": "negative"
+  },
+  {
+    "input": "This mouse started double-clicking on its own within a month. Awful build quality for the price.",
+    "output": "negative"
+  },
+  {
+    "input": "The rain jacket is about as waterproof as a paper bag. Got completely soaked in a light drizzle.",
+    "output": "negative"
+  },
+  {
+    "input": "Worst energy drink I've ever tasted. It smells like cough syrup and the aftertaste lingers for hours.",
+    "output": "negative"
+  },
+  {
+    "input": "The cloud storage service lost two of my folders during migration. Months of work just gone. Stay away.",
+    "output": "negative"
+  },
+  {
+    "input": "Our contractor missed the deadline by three weeks and then had the nerve to charge extra. Do not hire this company.",
+    "output": "negative"
+  },
+  {
+    "input": "The webcam image quality looks like it's from 2005. Grainy, washed out, and the autofocus hunts constantly.",
+    "output": "negative"
+  },
+  {
+    "input": "The soles of these sandals fell apart on the second wear. Glue everywhere. Embarrassing.",
+    "output": "negative"
+  },
+  {
+    "input": "This blender can barely crush ice. It just pushes the cubes around and makes a horrible grinding noise.",
+    "output": "negative"
+  },
+  {
+    "input": "The website builder is so unintuitive that I spent more time fighting the interface than designing my site. Switched to a competitor.",
+    "output": "negative"
+  },
+  {
+    "input": "The lawn care service scalped my yard and killed a patch of grass near the driveway. Unacceptable.",
+    "output": "negative"
+  },
+  {
+    "input": "The power strip overheated and melted the plastic casing. This is a genuine safety hazard. Returning immediately.",
+    "output": "negative"
+  },
+  {
+    "input": "Delivery took three weeks instead of the promised five days. By the time the gift arrived, the birthday had passed.",
+    "output": "negative"
+  },
+  {
+    "input": "Paid premium price for this moisturizer and it broke me out worse than the drugstore brand. So disappointing.",
+    "output": "negative"
+  },
+  {
+    "input": "The speaker sounds fine at low volumes but nothing special. It does what it's supposed to do.",
+    "output": "neutral"
+  },
+  {
+    "input": "Dress fits as expected. The fabric is thinner than I anticipated, but acceptable for the price point.",
+    "output": "neutral"
+  },
+  {
+    "input": "The instant ramen is edible. Not great, not terrible. It's ramen.",
+    "output": "neutral"
+  },
+  {
+    "input": "The spreadsheet software covers the basics well enough but lacks some advanced features I use occasionally. Works for most people.",
+    "output": "neutral"
+  },
+  {
+    "input": "The hotel was clean and in a convenient location. Nothing stood out as particularly good or bad.",
+    "output": "neutral"
+  },
+  {
+    "input": "Average USB hub. All four ports work. The cable could be longer but it gets the job done.",
+    "output": "neutral"
+  },
+  {
+    "input": "The leggings are comfortable for lounging but I wouldn't wear them to the gym. They're a bit see-through when stretched.",
+    "output": "neutral"
+  },
+  {
+    "input": "The tea has a mild flavor. If you're expecting something bold, look elsewhere, but it's a decent everyday option.",
+    "output": "neutral"
+  },
+  {
+    "input": "The photo editing app has a learning curve. Once you figure it out it's okay, but it's not as polished as the paid alternatives.",
+    "output": "neutral"
+  },
+  {
+    "input": "The ride-share experience was uneventful. Driver was quiet, car was clean, got there on time. Standard trip.",
+    "output": "neutral"
+  },
+  {
+    "input": "The external hard drive works as advertised. Transfer speeds match the specs. No complaints but nothing impressive either.",
+    "output": "neutral"
+  },
+  {
+    "input": "The flannel shirt looks exactly like the photos. It's a flannel shirt. Not sure what else to say about it.",
+    "output": "neutral"
+  },
+  {
+    "input": "The hot sauce has a decent kick but the flavor is one-dimensional. Good for some dishes, unnecessary for others.",
+    "output": "neutral"
+  },
+  {
+    "input": "The budgeting app tracks expenses accurately. The interface is plain but functional. It does the job without frills.",
+    "output": "neutral"
+  }
+]

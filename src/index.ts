@@ -3,14 +3,28 @@
 import { Command } from 'commander';
 import { error } from './utils/display.js';
 
+let verbose = false;
+
 const program = new Command();
 
 program
-  .name('distill')
-  .description('Train small, local ML models from input/output example pairs')
-  .version('0.1.0');
+  .name('expressible')
+  .description('Open-source CLI toolkit by Expressible AI, Inc.')
+  .version('0.1.0')
+  .option('--verbose', 'Show detailed error messages and stack traces')
+  .hook('preAction', (thisCommand) => {
+    const opts = thisCommand.optsWithGlobals();
+    if (opts['verbose']) {
+      verbose = true;
+    }
+  });
 
-program
+// --- distill subcommand group ---
+const distill = program
+  .command('distill')
+  .description('Train small, local ML models from input/output example pairs');
+
+distill
   .command('init <task-name>')
   .description('Create a new distill project')
   .action(async (taskName: string) => {
@@ -22,7 +36,7 @@ program
     }
   });
 
-program
+distill
   .command('add')
   .description('Add training examples')
   .option('-i, --input <file>', 'Input file path')
@@ -37,7 +51,7 @@ program
     }
   });
 
-program
+distill
   .command('train')
   .description('Train a model from your samples')
   .action(async () => {
@@ -49,7 +63,7 @@ program
     }
   });
 
-program
+distill
   .command('run [input]')
   .description('Run inference on input text or files')
   .action(async (input?: string) => {
@@ -61,7 +75,7 @@ program
     }
   });
 
-program
+distill
   .command('review')
   .description('Open the review UI to score model predictions')
   .action(async () => {
@@ -73,7 +87,7 @@ program
     }
   });
 
-program
+distill
   .command('retrain')
   .description('Retrain the model using review feedback')
   .action(async () => {
@@ -85,7 +99,7 @@ program
     }
   });
 
-program
+distill
   .command('stats')
   .description('Show project statistics')
   .action(async () => {
@@ -97,7 +111,7 @@ program
     }
   });
 
-program
+distill
   .command('export <output-dir>')
   .description('Export model for standalone use')
   .action(async (outputDir: string) => {
@@ -109,11 +123,41 @@ program
     }
   });
 
+distill
+  .command('doctor')
+  .description('Check system requirements and project health')
+  .action(async () => {
+    try {
+      const { doctorCommand } = await import('./commands/doctor.js');
+      await doctorCommand();
+    } catch (err) {
+      handleError(err);
+    }
+  });
+
+distill
+  .command('setup')
+  .description('Download embedding model and prepare for offline use')
+  .action(async () => {
+    try {
+      const { setupCommand } = await import('./commands/setup.js');
+      await setupCommand();
+    } catch (err) {
+      handleError(err);
+    }
+  });
+
 function handleError(err: unknown): void {
   if (err instanceof Error) {
     error(err.message);
+    if (verbose && err.stack) {
+      console.error('\n' + err.stack);
+    }
   } else {
     error(String(err));
+  }
+  if (!verbose) {
+    console.error('\nRun with --verbose for detailed error information.');
   }
   process.exit(1);
 }

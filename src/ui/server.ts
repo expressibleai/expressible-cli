@@ -76,23 +76,30 @@ export async function startReviewServer(
     setTimeout(() => process.exit(0), 500);
   });
 
-  const defaultPort = 3847;
   const server = createServer(app);
+  const startPort = 3847;
+  const maxAttempts = 20;
 
   await new Promise<void>((resolve, reject) => {
-    server.on('error', (err: NodeJS.ErrnoException) => {
-      if (err.code === 'EADDRINUSE') {
-        // Try next port
-        server.listen(defaultPort + 1, () => resolve());
-      } else {
-        reject(err);
-      }
-    });
-    server.listen(defaultPort, () => resolve());
+    let attempt = 0;
+
+    const tryPort = (port: number): void => {
+      server.once('error', (err: NodeJS.ErrnoException) => {
+        if (err.code === 'EADDRINUSE' && attempt < maxAttempts) {
+          attempt++;
+          tryPort(port + 1);
+        } else {
+          reject(new Error(`Could not find an available port (tried ${startPort}-${port}). Close other services or try again.`));
+        }
+      });
+      server.listen(port, () => resolve());
+    };
+
+    tryPort(startPort);
   });
 
   const address = server.address();
-  const port = typeof address === 'object' && address ? address.port : defaultPort;
+  const port = typeof address === 'object' && address ? address.port : startPort;
   const url = `http://localhost:${port}`;
 
   success(`Review server running at ${url}`);

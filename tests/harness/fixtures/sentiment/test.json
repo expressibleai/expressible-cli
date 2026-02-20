@@ -1,0 +1,82 @@
+[
+  {
+    "input": "This air purifier has made a huge difference for my allergies. I can finally sleep through the night without congestion.",
+    "output": "positive"
+  },
+  {
+    "input": "Incredible value for a standing desk. Sturdy, quiet motor, and the memory presets save me so much fiddling every morning.",
+    "output": "positive"
+  },
+  {
+    "input": "The dog food subscription has been fantastic. My picky eater actually finishes his bowl now and his coat looks shinier.",
+    "output": "positive"
+  },
+  {
+    "input": "Just finished setting up the smart thermostat. Installation was painless and it already cut my energy bill by 15% in the first month.",
+    "output": "positive"
+  },
+  {
+    "input": "The language learning app keeps me engaged with short daily lessons. After three months I can hold a basic conversation in Portuguese.",
+    "output": "positive"
+  },
+  {
+    "input": "These noise-canceling headphones are worth the hype. Wore them on a 12-hour flight and barely noticed the engine noise.",
+    "output": "positive"
+  },
+  {
+    "input": "The sushi knife is razor sharp and beautifully balanced. Makes prep work feel effortless.",
+    "output": "positive"
+  },
+  {
+    "input": "Great, another fitness tracker that can't survive a single rainstorm. The waterproof rating was apparently just a suggestion.",
+    "output": "negative"
+  },
+  {
+    "input": "The vacuum robot gets stuck under my couch every single time and then screams for help at 3 AM. Returning it.",
+    "output": "negative"
+  },
+  {
+    "input": "Paid for express shipping on supplements that arrived with half the bottles already open. Warehouse quality control is nonexistent.",
+    "output": "negative"
+  },
+  {
+    "input": "The email client somehow manages to make sending an email feel like filing taxes. Overly complicated for no reason.",
+    "output": "negative"
+  },
+  {
+    "input": "The electrician left exposed wires in the wall and didn't pass inspection. Had to hire someone else to fix his work.",
+    "output": "negative"
+  },
+  {
+    "input": "It's fine I guess. The smartwatch tells time and counts steps but the heart rate monitor is wildly inaccurate.",
+    "output": "negative"
+  },
+  {
+    "input": "Oh wonderful, the printer jammed on the very first page. Really setting the bar high here.",
+    "output": "negative"
+  },
+  {
+    "input": "The backpack holds everything I need. Nothing about it particularly stands out but nothing bothers me either.",
+    "output": "neutral"
+  },
+  {
+    "input": "Tried the new burger place downtown. The food was fine, portions were average, prices were about what you'd expect. Might go back if I'm in the area.",
+    "output": "neutral"
+  },
+  {
+    "input": "The screen protector went on without bubbles, which is nice, but it does slightly reduce touch sensitivity. Tradeoffs.",
+    "output": "neutral"
+  },
+  {
+    "input": "The gym membership comes with decent equipment and okay hours. It's not a premium experience but the price reflects that.",
+    "output": "neutral"
+  },
+  {
+    "input": "The mattress topper added some cushion but didn't transform my sleep like the ads claimed. It's an improvement, just a modest one.",
+    "output": "neutral"
+  },
+  {
+    "input": "The streaming service has a large library but the recommendation algorithm keeps suggesting things I've already watched. Mixed bag overall.",
+    "output": "neutral"
+  }
+]

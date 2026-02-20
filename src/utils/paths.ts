@@ -63,6 +63,6 @@ export function findTaskDir(): string {
     dir = parent;
   }
   throw new Error(
-    'Not inside a distill project. Run "distill init <task-name>" to create one, or cd into an existing project.'
+    'Not inside a distill project. Run "expressible distill init <task-name>" to create one, or cd into an existing project.'
   );
 }

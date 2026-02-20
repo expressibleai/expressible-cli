@@ -27,8 +27,14 @@ async function loadPipeline(): Promise<EmbeddingPipeline> {
   transformers.env.cacheDir = cacheDir;
   transformers.env.allowLocalModels = true;
 
-  info('Loading embedding model (all-MiniLM-L6-v2)...');
-  info('This may take a moment on first run as the model downloads (~80MB).');
+  // Check if model is already downloaded
+  const modelMarker = path.join(cacheDir, 'Xenova', 'all-MiniLM-L6-v2');
+  const isFirstRun = !fs.existsSync(modelMarker);
+
+  if (isFirstRun) {
+    info('Downloading embedding model (all-MiniLM-L6-v2, ~80MB)...');
+    info('This is a one-time download.');
+  }
 
   const extractor = await transformers.pipeline(
     'feature-extraction',

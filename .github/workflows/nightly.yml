@@ -1,0 +1,49 @@
+name: Nightly Integration Test
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # 6am UTC daily
+  workflow_dispatch:       # manual trigger
+
+jobs:
+  real-model-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Run full pipeline with real embedding model
+        run: |
+          node dist/index.js init test-sentiment --type classify --no-interactive 2>/dev/null || true
+
+          cd test-sentiment || exit 1
+          mkdir -p samples
+
+          for i in $(seq 1 4); do
+            printf "This product is wonderful and amazing\n" > "samples/$(printf '%03d' $i).input.txt"
+            printf "positive\n" > "samples/$(printf '%03d' $i).output.txt"
+          done
+
+          for i in $(seq 5 8); do
+            printf "Terrible quality, completely broken\n" > "samples/$(printf '%03d' $i).input.txt"
+            printf "negative\n" > "samples/$(printf '%03d' $i).output.txt"
+          done
+
+          for i in $(seq 9 12); do
+            printf "The item arrived as described\n" > "samples/$(printf '%03d' $i).input.txt"
+            printf "neutral\n" > "samples/$(printf '%03d' $i).output.txt"
+          done
+
+          node ../dist/index.js train
+          node ../dist/index.js run "This is the best thing ever"
+          node ../dist/index.js stats
+        timeout-minutes: 10

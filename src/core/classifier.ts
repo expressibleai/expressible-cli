@@ -2,6 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { getModelDir, ensureDir } from '../utils/paths.js';
 import { EMBEDDING_DIM } from './embeddings.js';
+import { loadTf } from './tf.js';
+import { fileIOHandler } from './model-io.js';
 import { info, warn, success } from '../utils/display.js';
 
 interface ClassifierMetadata {
@@ -26,7 +28,7 @@ export async function trainClassifier(
   labels: string[],
   taskDir: string
 ): Promise<TrainResult> {
-  const tf = await import('@tensorflow/tfjs-node');
+  const tf = await loadTf();
 
   const categories = Array.from(new Set(labels)).sort();
   const numCategories = categories.length;
@@ -149,8 +151,7 @@ export async function trainClassifier(
   const modelDir = getModelDir(taskDir);
   ensureDir(modelDir);
 
-  const modelPath = `file://${modelDir}`;
-  await model.save(modelPath);
+  await model.save(fileIOHandler(modelDir));
 
   // Save metadata
   const metadata: ClassifierMetadata = {
@@ -193,24 +194,23 @@ export async function predict(
   embedding: number[],
   taskDir: string
 ): Promise<PredictionResult> {
-  const tf = await import('@tensorflow/tfjs-node');
+  const tf = await loadTf();
 
   const modelDir = getModelDir(taskDir);
   const metadataPath = path.join(modelDir, 'metadata.json');
 
   if (!fs.existsSync(metadataPath)) {
-    throw new Error('No trained model found. Run "distill train" first.');
+    throw new Error('No trained model found. Run "expressible distill train" first.');
   }
 
   const metadata: ClassifierMetadata = JSON.parse(
     fs.readFileSync(metadataPath, 'utf-8')
   );
 
-  const modelPath = `file://${path.join(modelDir, 'model.json')}`;
-  const model = await tf.loadLayersModel(modelPath);
+  const model = await tf.loadLayersModel(fileIOHandler(modelDir));
 
   const inputTensor = tf.tensor2d([embedding]);
-  const output = model.predict(inputTensor) as import('@tensorflow/tfjs-node').Tensor;
+  const output = model.predict(inputTensor) as ReturnType<typeof tf.tensor>;
   const scores = await output.data();
 
   const allScores = metadata.categories.map((category, i) => ({

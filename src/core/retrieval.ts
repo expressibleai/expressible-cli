@@ -67,7 +67,7 @@ export function loadRetrievalModel(taskDir: string): RetrievalModelData {
   const modelPath = path.join(modelDir, 'retrieval_model.json');
 
   if (!fs.existsSync(modelPath)) {
-    throw new Error('No trained retrieval model found. Run "distill train" first.');
+    throw new Error('No trained retrieval model found. Run "expressible distill train" first.');
   }
 
   const raw = fs.readFileSync(modelPath, 'utf-8');
