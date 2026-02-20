@@ -50,6 +50,9 @@ cd clause-detector
 Provide contract clauses labeled by type — from your own review history, from past LLM outputs, or hand-labeled by your legal team:
 
 ```bash
+# Import from a JSON file
+expressible distill add --file ./labeled-clauses.json
+
 # Bulk import from a directory of labeled pairs
 expressible distill add --dir ./labeled-clauses/
 
@@ -59,6 +62,8 @@ expressible distill add
 #          any business competitive with the Business in the Territory."
 # Label: non-compete
 ```
+
+The JSON file should contain an array of `{ "input": "...", "output": "..." }` objects.
 
 You need at least 10 labeled examples. 50+ gives strong results.
 
