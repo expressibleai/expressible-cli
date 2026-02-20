@@ -41,8 +41,9 @@ distill
   .description('Add training examples')
   .option('-i, --input <file>', 'Input file path')
   .option('-o, --output <file>', 'Output file path')
-  .option('-d, --dir <directory>', 'Bulk import from directory')
-  .action(async (options: { input?: string; output?: string; dir?: string }) => {
+  .option('-d, --dir <directory>', 'Bulk import from directory of paired files')
+  .option('-f, --file <file>', 'Import from JSON file (array of {input, output} objects)')
+  .action(async (options: { input?: string; output?: string; dir?: string; file?: string }) => {
     try {
       const { addCommand } = await import('./commands/add.js');
       await addCommand(options);

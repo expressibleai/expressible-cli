@@ -42,8 +42,6 @@ npm install -g expressible
 
 ```bash
 expressible distill init clause-detector
-# Select: classify
-
 cd clause-detector
 ```
 
@@ -52,6 +50,9 @@ cd clause-detector
 Provide contract clauses labeled by type — from your own review history, from past LLM outputs, or hand-labeled by your legal team:
 
 ```bash
+# Import from a JSON file
+expressible distill add --file ./labeled-clauses.json
+
 # Bulk import from a directory of labeled pairs
 expressible distill add --dir ./labeled-clauses/
 
@@ -61,6 +62,8 @@ expressible distill add
 #          any business competitive with the Business in the Territory."
 # Label: non-compete
 ```
+
+The JSON file should contain an array of `{ "input": "...", "output": "..." }` objects.
 
 You need at least 10 labeled examples. 50+ gives strong results.
 
@@ -141,10 +144,6 @@ Everything.
 
 **Legal document review** — Classify contract clauses by type across thousands of agreements. Privileged documents stay within your perimeter.
 
-**Invoice data extraction** — Pull vendor, amount, date, and line items from invoices in varying formats. Financial data never touches an external API.
-
-**Resume parsing** — Extract structured candidate data from resumes. PII stays internal, meeting data handling obligations.
-
 **Log analysis and alerting** — Classify application logs as normal, warning, error, security event, or performance degradation. Thousands per hour, entirely local.
 
 **Content moderation** — Classify user-generated content against your community guidelines. Consistent categories, high volume.
@@ -155,16 +154,23 @@ Everything.
 
 ### Benchmarks
 
-Measured on held-out test data the model has never seen, with 50 training samples per scenario:
+With 50 labeled examples (~30 minutes of work), no API keys, and no ML expertise:
 
-| Scenario | Accuracy |
-|---|---|
-| Content moderation (safe / offensive / spam) | 95.0% |
-| Support ticket routing (billing / technical / account / shipping) | 90.0% |
-| News categorization (politics / sports / tech / entertainment / business) | 84.0% |
-| Sentiment analysis (positive / negative / neutral) | 65.0% |
+| Scenario | Accuracy | Data Source |
+|---|---|---|
+| News categorization (5 categories) | 96.0% | Synthetic |
+| Support ticket routing (4 categories) | 90.0% | Synthetic |
+| Content moderation (3 categories) | 90.0% | Synthetic |
+| 20 Newsgroups (5 categories) | 87.0% | [Public dataset](https://huggingface.co/datasets/SetFit/20_newsgroups) |
+| AG News (4 categories) | 76.0% | [Public dataset](https://huggingface.co/datasets/fancyzhx/ag_news) |
 
-Full results, methodology, and instructions for running the test harness: **[docs/benchmarks.md](docs/benchmarks.md)**
+Public dataset results use real-world text from established ML benchmarks — 50 samples drawn from datasets containing 120,000+ entries. All samples and the test harness are included in the repo so you can reproduce these results:
+
+```bash
+npx tsx tests/harness/run.ts
+```
+
+Accuracy improves as you add more examples through the review-retrain loop. Full results, methodology, and known limitations: **[docs/benchmarks.md](docs/benchmarks.md)**
 
 ---
 
@@ -178,13 +184,13 @@ Full results, methodology, and instructions for running the test harness: **[doc
 
 ---
 
-### Task Types
+### Task Type
+
+Distill trains **classification** models: text in, one of N categories out.
 
 | Type | Input → Output | Example |
 |------|---------------|---------|
 | **classify** | Text → one of N categories | Contract clause → `indemnification` |
-| **extract** | Text → structured JSON | Invoice → `{ "vendor": "...", "total": "..." }` |
-| **transform** | Text → text | Complaint → templated response |
 
 ### Commands
 
@@ -215,7 +221,7 @@ expressible distill setup           Pre-download embedding model for offline use
 No. This replaces the *repetitive, pattern-based* subset of LLM calls — the ones where the same prompt structure processes different data every time. For tasks that require reasoning, creativity, or open-ended generation, you still want an LLM.
 
 **How many examples do I need?**
-10 minimum for classification, 20 for extraction/transformation. In practice, 50–100 examples with good coverage of your categories will give you strong results.
+10 minimum. In practice, 50–100 examples with good coverage of your categories will give you strong results.
 
 **How accurate is it?**
 For well-defined classification tasks with clear categories and 50+ examples, 85–95% accuracy is typical. The review → retrain loop lets you improve iteratively.

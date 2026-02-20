@@ -1,15 +1,12 @@
 import { findTaskDir } from '../utils/paths.js';
-import { readConfig } from '../core/config.js';
 import { loadSamples, loadValidationResults, saveValidationResults } from '../core/data.js';
-import { embedTexts, embedText } from '../core/embeddings.js';
+import { embedText } from '../core/embeddings.js';
 import { predict } from '../core/classifier.js';
-import { retrievalPredict } from '../core/retrieval.js';
 import { success, error, info, heading } from '../utils/display.js';
 import type { ValidationResult, ValidationResults } from '../core/data.js';
 
 export async function reviewCommand(): Promise<void> {
   const taskDir = findTaskDir();
-  const config = readConfig(taskDir);
   const samples = loadSamples(taskDir);
 
   if (samples.length === 0) {
@@ -31,20 +28,11 @@ export async function reviewCommand(): Promise<void> {
     const embedding = await embedText(sample.input, taskDir);
     let predictedOutput: string;
 
-    if (config.type === 'classify') {
-      try {
-        const result = await predict(embedding, taskDir);
-        predictedOutput = result.category;
-      } catch {
-        predictedOutput = '(no model trained — showing expected output)';
-      }
-    } else {
-      try {
-        const result = retrievalPredict(embedding, taskDir);
-        predictedOutput = result.output;
-      } catch {
-        predictedOutput = '(no model trained — showing expected output)';
-      }
+    try {
+      const result = await predict(embedding, taskDir);
+      predictedOutput = result.category;
+    } catch {
+      predictedOutput = '(no model trained — showing expected output)';
     }
 
     newItems.push({

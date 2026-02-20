@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import inquirer from 'inquirer';
 import { getTaskDir, getSamplesDir, getModelDir, getValidationDir, getInternalDir, ensureDir } from '../utils/paths.js';
-import { writeConfig, type TaskType, type DistillConfig } from '../core/config.js';
+import { writeConfig, type DistillConfig } from '../core/config.js';
 import { success, error, info } from '../utils/display.js';
 
 export async function initCommand(taskName: string): Promise<void> {
@@ -14,16 +14,6 @@ export async function initCommand(taskName: string): Promise<void> {
   }
 
   const answers = await inquirer.prompt([
-    {
-      type: 'list',
-      name: 'type',
-      message: 'What type of task is this?',
-      choices: [
-        { name: 'classify — input text → one of N categories', value: 'classify' },
-        { name: 'extract  — input text → structured data (JSON)', value: 'extract' },
-        { name: 'transform — input text → output text', value: 'transform' },
-      ],
-    },
     {
       type: 'input',
       name: 'description',
@@ -41,7 +31,7 @@ export async function initCommand(taskName: string): Promise<void> {
 
   const config: DistillConfig = {
     name: taskName,
-    type: answers.type as TaskType,
+    type: 'classify',
     description: answers.description,
     createdAt: new Date().toISOString(),
     version: '1.0.0',
@@ -49,6 +39,6 @@ export async function initCommand(taskName: string): Promise<void> {
 
   writeConfig(taskDir, config);
 
-  success(`Created distill project "${taskName}" (${answers.type})`);
+  success(`Created distill project "${taskName}"`);
   info(`Add training examples with: cd ${taskName} && expressible distill add`);
 }

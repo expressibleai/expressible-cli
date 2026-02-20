@@ -2,10 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { glob } from 'glob';
 import { findTaskDir } from '../utils/paths.js';
-import { readConfig } from '../core/config.js';
 import { embedText } from '../core/embeddings.js';
 import { predict } from '../core/classifier.js';
-import { retrievalPredict } from '../core/retrieval.js';
 import { error } from '../utils/display.js';
 
 interface RunResult {
@@ -14,29 +12,18 @@ interface RunResult {
   confidence: number;
 }
 
-async function runSingle(input: string, taskDir: string, taskType: string): Promise<RunResult> {
+async function runSingle(input: string, taskDir: string): Promise<RunResult> {
   const embedding = await embedText(input, taskDir);
-
-  if (taskType === 'classify') {
-    const result = await predict(embedding, taskDir);
-    return {
-      input,
-      output: result.category,
-      confidence: Math.round(result.confidence * 100) / 100,
-    };
-  } else {
-    const result = retrievalPredict(embedding, taskDir);
-    return {
-      input,
-      output: result.output,
-      confidence: Math.round(result.confidence * 100) / 100,
-    };
-  }
+  const result = await predict(embedding, taskDir);
+  return {
+    input,
+    output: result.category,
+    confidence: Math.round(result.confidence * 100) / 100,
+  };
 }
 
 export async function runCommand(inputArg?: string): Promise<void> {
   const taskDir = findTaskDir();
-  const config = readConfig(taskDir);
 
   const inputs: string[] = [];
 
@@ -78,7 +65,7 @@ export async function runCommand(inputArg?: string): Promise<void> {
 
   const results: RunResult[] = [];
   for (const input of inputs) {
-    const result = await runSingle(input, taskDir, config.type);
+    const result = await runSingle(input, taskDir);
     results.push(result);
   }
 

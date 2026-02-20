@@ -1,0 +1,202 @@
+[
+  {
+    "input": "No. 18 Louisville at No. 3 Miami TV - tvelwtvscwtvpcwtvnrw. Radio - WQAM (560 AM) WSUA-Spanish (1260 AM), WVUM (90.5 FM), WEFL (760 AM). Coaches: UM #39;s Larry Coker is 39-3 in his fourth season; Louisville #39;s Bobby Petrino is 13-4 in his second season.",
+    "output": "sports"
+  },
+  {
+    "input": "Calling All Troops, and Then Some, in Iraq Even as American and Iraqi forces move to surround the last large group of insurgents in Falluja this weekend, they are also scrambling to quell fighting that has erupted in many other Sunni towns and cities in Iraq.",
+    "output": "world"
+  },
+  {
+    "input": "Airespace partners with IBM on Wi-Fi service SEPTEMBER 16, 2004 (REUTERS) - Airespace Inc. a Silicon Valley telecommunications services start-up, won a partnership with IBM that will help Airespace grab a piece of the growing market for Wi-Fi services, the two companies said yesterday.",
+    "output": "sci-tech"
+  },
+  {
+    "input": "Els won #39;t bow to USPGA World no. 2 Ernie Els is fuming after receiving demands from the American Tour that he must play more tournaments in the US. Els has received a letter from USPGA Commissioner Tim Finchem regarding his commitment ",
+    "output": "sports"
+  },
+  {
+    "input": "Teenager joins the race for future NASCAR success Next October, Chase Austin will finally be old enough to drive to the grocery store by himself. By then, though, he #39;ll also have a full season of stock car racing under his belt.",
+    "output": "sports"
+  },
+  {
+    "input": "Flights Leave in Odd Calm in Ivory Coast An eerie calm prevailed on the streets of this battered city on Saturday, as hundreds more foreigners awaited flights to Paris that would spirit them away ",
+    "output": "world"
+  },
+  {
+    "input": "Putin #39;s Power Play On Monday Russian President Vladimir Putin announced the biggest shake-up of Russia #39;s political system since its 1993 adoption of a post-Soviet constitution, drawing heaps of scorn from both the Russian and international press.",
+    "output": "world"
+  },
+  {
+    "input": "shuttle fragment found in Texas A large piece of space shuttle Columbia debris was found recently in southeast Texas, a NASA official said. The 6-foot-long piece of the crew compartment was discovered two weeks ago ",
+    "output": "sci-tech"
+  },
+  {
+    "input": "Red Crescent barred from city Baghdad - US troops were preventing a Red Crescent convoy of emergency aid from reaching helpless residents inside Fallujah on Saturday after allowing it as far as the main hospital, a spokesperson said.",
+    "output": "world"
+  },
+  {
+    "input": "Chinese in the dark as leaders gather  quot;I don #39;t know anything about the leadership struggles, it #39;s not in the newspapers, quot; said newsstand vendor Shao Guofu.",
+    "output": "world"
+  },
+  {
+    "input": "Wall St. Bears Claw Back Into the Black (Reuters) Reuters - Short-sellers, Wall Street's dwindling\\band of ultra-cynics, are seeing green again.",
+    "output": "business"
+  },
+  {
+    "input": "Fed minutes show dissent over inflation (USATODAY.com) USATODAY.com - Retail sales bounced back a bit in July, and new claims for jobless benefits fell last week, the government said Thursday, indicating the economy is improving from a midsummer slump.",
+    "output": "business"
+  },
+  {
+    "input": "Iraq Halts Oil Exports from Main Southern Pipeline (Reuters) Reuters - Authorities have halted oil export\\flows from the main pipeline in southern Iraq after\\intelligence showed a rebel militia could strike\\infrastructure, an oil official said on Saturday.",
+    "output": "business"
+  },
+  {
+    "input": "Prince Sihamoni to be named new king of Cambodia Prince Norodom Sihamoni will be named king of Cambodia later on Thursday by the nine-member Throne Council, said the national assembly president in Phnom Penh.",
+    "output": "world"
+  },
+  {
+    "input": "Davenport's Victory Over Williams May Not Be Enough  LOS ANGELES (Reuters) - Top-ranked Lindsay Davenport pulled  off a stunning 3-6, 7-5, 6-1 win over Serena Williams at the  WTA Tour Championships Saturday, but her battling effort may  still might not be enough to get her into the semifinals.",
+    "output": "sports"
+  },
+  {
+    "input": "No Need for OPEC to Pump More-Iran Gov  TEHRAN (Reuters) - OPEC can do nothing to douse scorching  oil prices when markets are already oversupplied by 2.8 million  barrels per day (bpd) of crude, Iran's OPEC governor said  Saturday, warning that prices could fall sharply.",
+    "output": "business"
+  },
+  {
+    "input": "Space Shuttle Columbia Fragment Found in Texas LUFKIN, Texas (AP) -- A large piece of space shuttle Columbia debris was found recently in southeast Texas, a NASA official said.    The 6-foot-long piece of the crew compartment was discovered two weeks ago in Newton County by a wildlife biologist, sheriffs officials said...",
+    "output": "sci-tech"
+  },
+  {
+    "input": "Australian rower Oliver goes slap-happy Australia #39;s women #39;s rowing team was hit by scandal again Thursday when Catriona Oliver walked up to teammate Sally Robbins and slapped her shoulder.",
+    "output": "sports"
+  },
+  {
+    "input": "Carlyle Looks Toward Commercial Aerospace (Reuters) Reuters - Private investment firm Carlyle Group,\\which has a reputation for making well-timed and occasionally\\controversial plays in the defense industry, has quietly placed\\its bets on another part of the market.",
+    "output": "business"
+  },
+  {
+    "input": "Oil prices soar to all-time record, posing new menace to US economy (AFP) AFP - Tearaway world oil prices, toppling records and straining wallets, present a new economic menace barely three months before the US presidential elections.",
+    "output": "business"
+  },
+  {
+    "input": "Nortel sees slower-than-market growth in Q3 Nortel Networks Corp. expects its revenue in the third quarter to fall below the previous quarter's estimated number and for its full-year 2004 revenue to grow slower than the overall communications equipment industry, the company said in a statement Thursday.",
+    "output": "sci-tech"
+  },
+  {
+    "input": "Woods to play at 84 Lumber Classic The battle for No. 1 between Vijay Singh and Tiger Woods is coming to western Pennsylvania. Woods has agreed to play in the 84 Lumber Classic near Farmington, Pa.",
+    "output": "sports"
+  },
+  {
+    "input": "Briefly: Nortel lowers expectations roundup Plus: Microsoft connects with SAP...Autodesk updates hobbyist tool...LogicLibrary buys bug catcher...Think local, act Google.",
+    "output": "sci-tech"
+  },
+  {
+    "input": "LSU-Auburn Rivalry Could Get New Chapter (AP) AP - Auburn and LSU have played several nickname games in recent years: The Fire Game. The Interception Game. The Cigar Game.",
+    "output": "sports"
+  },
+  {
+    "input": "Oil and Economy Cloud Stocks' Outlook  NEW YORK (Reuters) - Soaring crude prices plus worries  about the economy and the outlook for earnings are expected to  hang over the stock market next week during the depth of the  summer doldrums.",
+    "output": "business"
+  },
+  {
+    "input": "Mouse for the nose Canadian inventor Dmitry Gorodnichy has devised the world #39;s first computer to be controlled by the nose and eyelids. The gadget could be a boon for people with disabilities who cannot use the conventional ",
+    "output": "sci-tech"
+  },
+  {
+    "input": "Donors examine billions of dollars in aid for Iraq TOKYO: Donors to Iraq #39;s reconstruction are examining billions of dollars in aid pledges that have gone mostly unused amid an insurgency, as the interim government appealed for firmer world support.",
+    "output": "world"
+  },
+  {
+    "input": "Kids create new sign language A new sign language created over 30 years by deaf Nicaraguan children, gives a unique insight into how languages evolve.",
+    "output": "world"
+  },
+  {
+    "input": "West Virginia #39;s task: Climb over Maryland An hour or so after West Virginia dispatched Central Florida on a steamy Saturday night in Orlando, West Virginia football coach Rich Rodriguez #39;s thoughts turned to this weekend #39;s opponent, No.",
+    "output": "sports"
+  },
+  {
+    "input": "Vodafone Peddles New BlackBerry Research In Motion #39;s BlackBerry 7100v, which sports the company #39;s latest keyboard technology, is being offered exclusively through Vodafone.",
+    "output": "sci-tech"
+  },
+  {
+    "input": "Large piece of space shuttle Columbia found LUFKIN, TEXAS - A 1.8-metre-long piece of the space shuttle Columbia was recently found in Texas, according to NASA. The shuttle broke up over the state on Feb. 1, 2003, killing all seven astronauts on board.",
+    "output": "sci-tech"
+  },
+  {
+    "input": "OFFICER PROBE AS GIRL SHOT DEAD IN GAZA THE Israeli army has suspended a platoon commander accused by his soldiers of emptying an ammunition clip into a Palestinian girl of 13.",
+    "output": "world"
+  },
+  {
+    "input": "Non-OPEC Nations Should Up Output-Purnomo  JAKARTA (Reuters) - Non-OPEC oil exporters should consider  increasing output to cool record crude prices, OPEC President  Purnomo Yusgiantoro said on Sunday.",
+    "output": "business"
+  },
+  {
+    "input": "Ohio State Buckeyes Succeed in Close Games (AP) AP - Ohio State is 15-5 in games decided by a touchdown or less under coach Jim Tressel, an uncanny run of success that defies explanation.",
+    "output": "sports"
+  },
+  {
+    "input": "Hackers Jump On Reported Windows Flaws Less than a day after Microsoft detailed the latest Windows vulnerability, hackers were hunting for exploit codes. By Gregg Keizer, TechWeb News.",
+    "output": "sci-tech"
+  },
+  {
+    "input": "Kodak, IBM team up to build image sensors The two companies zoom in on semiconductor technology to help digital cameras and camera phones take better pictures.\\",
+    "output": "sci-tech"
+  },
+  {
+    "input": "Sub hits US hat-trick UNITED STATES, Mexico and Guatemala advanced to next year #39;s North American final round World Cup 2006 qualifying with shutout triumphs today, leaving seven nations to fight over three remaining spots.",
+    "output": "sports"
+  },
+  {
+    "input": "Kerry and Bush running neck and neck in White House race: poll (AFP) AFP - As the convention-time boost enjoyed by President George W. Bush began to wane, he and rival John Kerry were again running neck and neck less than two months ahead of the November 2 election.",
+    "output": "world"
+  },
+  {
+    "input": "EarthLink tests file-sharing program A new file-sharing program hit the Net late Wednesday, posted by none other than Internet service provider EarthLink. The software, hosted on an out-of-the-way corner of the company #39;s research and development ",
+    "output": "sci-tech"
+  },
+  {
+    "input": "Loeb is on course to equal win milestone World Champion Sebastien Loeb ended day two of the Rally Australia in Perth in the lead after Marcus Gronholm retired early. Citroen driver Loeb won three stages yesterday to take a 1min 20.",
+    "output": "sports"
+  },
+  {
+    "input": "Oil and Economy Cloud Stocks' Outlook (Reuters) Reuters - Soaring crude prices plus worries\\about the economy and the outlook for earnings are expected to\\hang over the stock market next week during the depth of the\\summer doldrums.",
+    "output": "business"
+  },
+  {
+    "input": "Kerry Accuses Bush of Hiding the Truth About Iraq Senator Kerry leveled his charges in a speech prepared for delivery later today before the National Guard Association in Las Vegas.",
+    "output": "world"
+  },
+  {
+    "input": "Panthers #39; defense takes big hit before game with Eagles PHILADELPHIA  The Carolina Panthers #39; hopes of relying on their defense to help their injury-plagued offense took a big hit Wednesday when coach Jon Fox announced that defensive tackle Kris ",
+    "output": "sports"
+  },
+  {
+    "input": "Safety Net (Forbes.com) Forbes.com - After earning a PH.D. in Sociology, Danny Bazil Riley started to work as the general manager at a commercial real estate firm at an annual base salary of  #36;70,000. Soon after, a financial planner stopped by his desk to drop off brochures about insurance benefits available through his employer. But, at 32, \"buying insurance was the furthest thing from my mind,\" says Riley.",
+    "output": "business"
+  },
+  {
+    "input": "Money Funds Fell in Latest Week (AP) AP - Assets of the nation's retail money market mutual funds fell by  #36;1.17 billion in the latest week to  #36;849.98 trillion, the Investment Company Institute said Thursday.",
+    "output": "business"
+  },
+  {
+    "input": "Stocks End Up, But Near Year Lows (Reuters) Reuters - Stocks ended slightly higher on Friday\\but stayed near lows for the year as oil prices surged past  #36;46\\a barrel, offsetting a positive outlook from computer maker\\Dell Inc. (DELL.O)",
+    "output": "business"
+  },
+  {
+    "input": "No. 3 Auburn Dominates Georgia 24-6 Auburn #39;s Devin Aromashodu can #39;t hang on to a pass during the first quarter against Georgia in Auburn, Ala. Saturday, Nov. 13, 2003.",
+    "output": "sports"
+  },
+  {
+    "input": "XM Radio Goes Online (NewsFactor) NewsFactor - XM Satellite Radio is the latest content provider to join the increasingly crowded online-music market, announcing the impending launch of a service delivering its radio programming via the Internet.",
+    "output": "sci-tech"
+  },
+  {
+    "input": "Election monitors weigh complaints in Afghanistan KABUL, AFGHANISTAN -- Foreign election experts on Wednesday studied complaints from candidates in Afghanistan #39;s first-ever presidential election, setting aside suspect ballot boxes and further delaying the vote count.",
+    "output": "world"
+  },
+  {
+    "input": "Wall St. Bears Claw Back Into the Black  NEW YORK (Reuters) - Short-sellers, Wall Street's dwindling  band of ultra-cynics, are seeing green again.",
+    "output": "business"
+  }
+]
