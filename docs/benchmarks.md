@@ -14,10 +14,10 @@ Distill works best for **topic and domain classification** — deciding *what ki
 
 | Scenario | Train | Test | Accuracy | Avg Confidence |
 |---|---|---|---|---|
-| News categorization | 50 | 25 | **96.0%** | 84.5% |
-| Support ticket routing | 51 | 20 | **90.0%** | 92.9% |
-| Content moderation | 50 | 20 | **90.0%** | 87.9% |
-| Sentiment analysis | 50 | 20 | 55.0% | 58.0% |
+| News categorization | 50 | 25 | **96.0%** | 70.4% |
+| Content moderation | 50 | 20 | **95.0%** | 89.2% |
+| Support ticket routing | 51 | 20 | **95.0%** | 91.1% |
+| Sentiment analysis | 50 | 20 | 65.0% | 60.6% |
 
 ### Classification — Public Datasets
 
@@ -33,9 +33,9 @@ These use real text from established ML benchmarks. Samples are included in the 
 
 | Group | Correct | Total | Accuracy |
 |---|---|---|---|
-| Synthetic (excl. sentiment) | 60 | 65 | **92.3%** |
+| Synthetic (excl. sentiment) | 62 | 65 | **95.4%** |
 | Public datasets (excl. SST-2) | 39 | 48 | **81.3%** |
-| All classification | 124 | 158 | **78.5%** |
+| All classification | 128 | 158 | **81.0%** |
 
 ### What works and what doesn't
 
@@ -50,7 +50,8 @@ Each scenario uses:
 - **Training set**: 50 labeled examples with balanced class distribution
 - **Test set**: 20–25 held-out examples the model has never seen, including deliberate edge cases
 - **Embeddings**: [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) sentence embeddings (384-dimensional)
-- **Classification model**: Two-layer neural network (128 + 64 units, ReLU, dropout 0.2, softmax output) trained with early stopping
+- **Classification model**: Two-layer neural network (128 + 64 units, ReLU, dropout 0.2, softmax output) trained with early stopping and best-epoch checkpoint
+- **Train/val split**: Stratified 80/20 split with deterministic seed for reproducibility (each class proportionally represented in validation)
 - **Scoring**: Exact label match
 
 Training and test data are fully separated. No test input appears in the training set.
@@ -95,7 +96,7 @@ To add your own scenario, create a new directory under `tests/harness/fixtures/`
 
 ## Notes
 
-- Results vary slightly between runs due to random weight initialization and train/validation splits
+- Train/validation splits are deterministic (seeded by training labels), so results are reproducible. Minor variation between runs comes from random weight initialization in the neural network.
 - Accuracy improves as you add more examples through the review-retrain loop — these benchmarks capture one-shot accuracy only
 - You need at least 10 examples to start. 50+ gives the results shown here
 - Sentiment/tone classification is a known limitation — the embedding model captures semantic meaning, not evaluative framing

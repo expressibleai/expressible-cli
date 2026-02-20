@@ -14,7 +14,7 @@ type EmbeddingPipeline = (text: string) => Promise<EmbeddingOutput>;
 let pipelineInstance: EmbeddingPipeline | null = null;
 
 function contentHash(text: string): string {
-  return crypto.createHash('sha256').update(text).digest('hex').slice(0, 16);
+  return crypto.createHash('sha256').update(text).digest('hex').slice(0, 32);
 }
 
 async function loadPipeline(): Promise<EmbeddingPipeline> {

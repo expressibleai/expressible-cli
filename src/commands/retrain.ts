@@ -44,16 +44,22 @@ export async function retrainCommand(): Promise<void> {
   // Add validated items
   let addedFromReview = 0;
   let excludedFromReview = 0;
+  let skippedConflicts = 0;
 
   for (const item of validation.items) {
     if (!item.reviewedAt) continue;
 
     if (item.approved) {
       // Thumbs up: add prediction as training data (if not already in samples)
-      const exists = trainingSamples.some(
-        (s) => s.input.trim() === item.input.trim() && s.output.trim() === item.predictedOutput.trim()
+      const existingForInput = trainingSamples.find(
+        (s) => s.input.trim() === item.input.trim()
       );
-      if (!exists) {
+      if (existingForInput && existingForInput.output.trim() !== item.predictedOutput.trim()) {
+        // Original sample has a different label — don't add conflicting data
+        skippedConflicts++;
+        continue;
+      }
+      if (!existingForInput) {
         trainingSamples.push({
           id: `review-${item.id}`,
           input: item.input,
@@ -78,6 +84,10 @@ export async function retrainCommand(): Promise<void> {
       // Thumbs down without correction: exclude
       excludedFromReview++;
     }
+  }
+
+  if (skippedConflicts > 0) {
+    warn(`${skippedConflicts} approved prediction(s) skipped — original sample has a different label.`);
   }
 
   info(`Training set: ${originalSamples.length} original + ${addedFromReview} from review`);

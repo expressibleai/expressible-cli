@@ -1,33 +1,9 @@
 import fs from 'node:fs';
-import path from 'node:path';
 import { findTaskDir, getModelDir, getModelMetadataPath } from '../utils/paths.js';
 import { readConfig } from '../core/config.js';
 import { loadSamples, loadValidationResults } from '../core/data.js';
 import { heading, table, warn, info } from '../utils/display.js';
-
-function getDirectorySize(dirPath: string): number {
-  if (!fs.existsSync(dirPath)) return 0;
-
-  let totalSize = 0;
-  const entries = fs.readdirSync(dirPath, { withFileTypes: true });
-
-  for (const entry of entries) {
-    const fullPath = path.join(dirPath, entry.name);
-    if (entry.isFile()) {
-      totalSize += fs.statSync(fullPath).size;
-    } else if (entry.isDirectory()) {
-      totalSize += getDirectorySize(fullPath);
-    }
-  }
-
-  return totalSize;
-}
-
-function formatBytes(bytes: number): string {
-  if (bytes < 1024) return `${bytes} B`;
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
-  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
-}
+import { getDirectorySize, formatBytes } from '../utils/fs.js';
 
 export async function statsCommand(): Promise<void> {
   const taskDir = findTaskDir();
@@ -65,8 +41,8 @@ export async function statsCommand(): Promise<void> {
 
   // Validation info
   if (validation.items.length > 0) {
-    const reviewed = validation.items.filter((i) => i.approved !== undefined).length;
-    const approved = validation.items.filter((i) => i.approved === true).length;
+    const reviewed = validation.items.filter((i) => i.reviewedAt).length;
+    const approved = validation.items.filter((i) => i.reviewedAt && i.approved === true).length;
     const approvalRate = reviewed > 0 ? ((approved / reviewed) * 100).toFixed(1) : 'N/A';
 
     rows.push(['Reviewed items', String(reviewed)]);

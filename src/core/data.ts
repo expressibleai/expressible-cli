@@ -35,7 +35,7 @@ export function loadSamples(taskDir: string): SamplePair[] {
   const samples: SamplePair[] = [];
 
   for (const inputFile of inputFiles) {
-    const id = inputFile.split('.')[0];
+    const id = inputFile.split('.input.')[0];
     const outputFile = files.find((f) => f.startsWith(id + '.output.'));
 
     if (!outputFile) {
@@ -60,7 +60,7 @@ export function getNextSampleId(taskDir: string): string {
   const files = fs.readdirSync(samplesDir);
   const ids = files
     .filter((f) => f.includes('.input.'))
-    .map((f) => parseInt(f.split('.')[0], 10))
+    .map((f) => parseInt(f.split('.input.')[0], 10))
     .filter((n) => !isNaN(n));
 
   if (ids.length === 0) return '001';

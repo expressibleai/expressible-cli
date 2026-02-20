@@ -84,15 +84,24 @@ export async function startReviewServer(
     let attempt = 0;
 
     const tryPort = (port: number): void => {
-      server.once('error', (err: NodeJS.ErrnoException) => {
+      const onError = (err: NodeJS.ErrnoException): void => {
+        server.removeListener('listening', onListening);
         if (err.code === 'EADDRINUSE' && attempt < maxAttempts) {
           attempt++;
           tryPort(port + 1);
         } else {
           reject(new Error(`Could not find an available port (tried ${startPort}-${port}). Close other services or try again.`));
         }
-      });
-      server.listen(port, () => resolve());
+      };
+
+      const onListening = (): void => {
+        server.removeListener('error', onError);
+        resolve();
+      };
+
+      server.once('error', onError);
+      server.once('listening', onListening);
+      server.listen(port);
     };
 
     tryPort(startPort);

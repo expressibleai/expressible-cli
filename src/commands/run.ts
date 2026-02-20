@@ -28,16 +28,28 @@ export async function runCommand(inputArg?: string): Promise<void> {
   const inputs: string[] = [];
 
   if (inputArg) {
-    // Check if it's a glob pattern or file
-    const matches = await glob(inputArg);
-    if (matches.length > 0) {
-      for (const match of matches) {
-        const content = fs.readFileSync(path.resolve(match), 'utf-8').trim();
+    // Check if it's a file path first, then try glob patterns, otherwise treat as text
+    if (fs.existsSync(inputArg)) {
+      const stat = fs.statSync(inputArg);
+      if (stat.isFile()) {
+        const content = fs.readFileSync(path.resolve(inputArg), 'utf-8').trim();
         inputs.push(content);
+      } else if (stat.isDirectory()) {
+        error(`"${inputArg}" is a directory. Provide a file path or text input.`);
+        process.exit(1);
       }
-    } else if (fs.existsSync(inputArg)) {
-      const content = fs.readFileSync(path.resolve(inputArg), 'utf-8').trim();
-      inputs.push(content);
+    } else if (/[*?{}\[\]]/.test(inputArg)) {
+      // Only try glob expansion if the input contains glob metacharacters
+      const matches = await glob(inputArg);
+      if (matches.length > 0) {
+        for (const match of matches) {
+          const content = fs.readFileSync(path.resolve(match), 'utf-8').trim();
+          inputs.push(content);
+        }
+      } else {
+        error(`Glob pattern "${inputArg}" matched no files.`);
+        process.exit(1);
+      }
     } else {
       // Treat as raw text input
       inputs.push(inputArg);

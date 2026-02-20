@@ -5,22 +5,20 @@ import path from 'node:path';
  * Custom file system IO handler for TensorFlow.js model save/load.
  * Works with both @tensorflow/tfjs-node and pure @tensorflow/tfjs,
  * avoiding the file:// URL scheme which is only handled by tfjs-node.
+ *
+ * The returned object implements TF's IOHandler interface:
+ *   save(modelArtifacts) → writes model.json + weights.bin to modelDir
+ *   load()              → reads model.json + weights.bin from modelDir
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function fileIOHandler(modelDir: string): any {
   return {
-    async save(modelArtifacts: {
-      modelTopology?: unknown;
-      weightSpecs?: { name: string; shape: number[]; dtype: string }[];
-      weightData?: ArrayBuffer | ArrayBuffer[];
-      format?: string;
-      generatedBy?: string | null;
-      convertedBy?: string | null;
-    }) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    async save(modelArtifacts: any) {
       const weightsPath = path.join(modelDir, 'weights.bin');
       if (modelArtifacts.weightData) {
         const data = Array.isArray(modelArtifacts.weightData)
-          ? Buffer.concat(modelArtifacts.weightData.map((b) => Buffer.from(b)))
+          ? Buffer.concat(modelArtifacts.weightData.map((b: ArrayBuffer) => Buffer.from(b)))
           : Buffer.from(modelArtifacts.weightData);
         fs.writeFileSync(weightsPath, data);
       }
@@ -50,7 +48,7 @@ export function fileIOHandler(modelDir: string): any {
       return {
         modelArtifactsInfo: {
           dateSaved: new Date(),
-          modelTopologyType: 'JSON',
+          modelTopologyType: 'JSON' as const,
         },
       };
     },

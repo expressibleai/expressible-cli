@@ -159,8 +159,8 @@ With 50 labeled examples (~30 minutes of work), no API keys, and no ML expertise
 | Scenario | Accuracy | Data Source |
 |---|---|---|
 | News categorization (5 categories) | 96.0% | Synthetic |
-| Support ticket routing (4 categories) | 90.0% | Synthetic |
-| Content moderation (3 categories) | 90.0% | Synthetic |
+| Content moderation (3 categories) | 95.0% | Synthetic |
+| Support ticket routing (4 categories) | 95.0% | Synthetic |
 | 20 Newsgroups (5 categories) | 87.0% | [Public dataset](https://huggingface.co/datasets/SetFit/20_newsgroups) |
 | AG News (4 categories) | 76.0% | [Public dataset](https://huggingface.co/datasets/fancyzhx/ag_news) |
 

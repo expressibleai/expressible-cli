@@ -1,10 +1,22 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { getModelDir, ensureDir } from '../utils/paths.js';
 import { EMBEDDING_DIM } from './embeddings.js';
 import { loadTf } from './tf.js';
 import { fileIOHandler } from './model-io.js';
 import { info, warn, success } from '../utils/display.js';
+
+/** Simple seeded PRNG (mulberry32) for reproducible shuffles */
+function seededRandom(seed: number): () => number {
+  return () => {
+    seed |= 0;
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
 
 interface ClassifierMetadata {
   type: 'classifier';
@@ -54,21 +66,43 @@ export async function trainClassifier(
     return arr;
   });
 
+  // Stratified train/val split — proportional representation of each class
   // For small datasets (<30), use 90/10 split to keep more training data
   // For larger datasets, use standard 80/20
   const valFraction = embeddings.length < 30 ? 0.1 : 0.2;
-  const numVal = Math.max(1, Math.floor(embeddings.length * valFraction));
-  const numTrain = embeddings.length - numVal;
 
-  // Shuffle indices
-  const indices = Array.from({ length: embeddings.length }, (_, i) => i);
-  for (let i = indices.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [indices[i], indices[j]] = [indices[j], indices[i]];
+  // Deterministic seed derived from data
+  const dataHash = crypto.createHash('md5')
+    .update(labels.join('|'))
+    .digest()
+    .readUInt32LE(0);
+  const rand = seededRandom(dataHash);
+
+  // Group indices by category for stratified split
+  const categoryIndices = new Map<string, number[]>();
+  for (let i = 0; i < labels.length; i++) {
+    const cat = labels[i];
+    if (!categoryIndices.has(cat)) categoryIndices.set(cat, []);
+    categoryIndices.get(cat)!.push(i);
   }
 
-  const trainIndices = indices.slice(0, numTrain);
-  const valIndices = indices.slice(numTrain);
+  const trainIndices: number[] = [];
+  const valIndices: number[] = [];
+
+  for (const [, indices] of categoryIndices) {
+    // Shuffle within category
+    for (let i = indices.length - 1; i > 0; i--) {
+      const j = Math.floor(rand() * (i + 1));
+      [indices[i], indices[j]] = [indices[j], indices[i]];
+    }
+    // Take proportional validation samples (at least 1 per class if possible)
+    const numValForClass = Math.max(1, Math.floor(indices.length * valFraction));
+    valIndices.push(...indices.slice(0, numValForClass));
+    trainIndices.push(...indices.slice(numValForClass));
+  }
+
+  const numTrain = trainIndices.length;
+  const numVal = valIndices.length;
 
   const trainX = tf.tensor2d(trainIndices.map((i) => embeddings[i]));
   const trainY = tf.tensor2d(trainIndices.map((i) => oneHot[i]));
@@ -116,7 +150,10 @@ export async function trainClassifier(
 
   let finalAccuracy = 0;
   let finalValAccuracy = 0;
+  let bestAccuracy = 0;
+  let bestValAccuracy = 0;
   let totalEpochs = 0;
+  let bestWeights: ArrayBuffer[] | null = null;
 
   for (let epoch = 0; epoch < maxEpochs; epoch++) {
     const history = await model.fit(trainX, trainY, {
@@ -138,6 +175,10 @@ export async function trainClassifier(
       bestValLoss = valLoss;
       patienceCounter = 0;
       bestEpoch = epoch;
+      bestAccuracy = trainAcc;
+      bestValAccuracy = valAcc;
+      // Checkpoint best weights
+      bestWeights = model.getWeights().map((w) => w.dataSync().slice().buffer);
     } else {
       patienceCounter++;
       if (patienceCounter >= patience) {
@@ -147,7 +188,20 @@ export async function trainClassifier(
     }
   }
 
-  // Save model
+  // Restore best weights before saving
+  if (bestWeights && totalEpochs > bestEpoch + 1) {
+    const currentWeights = model.getWeights();
+    const restoredWeights = bestWeights.map((buf, i) =>
+      tf.tensor(new Float32Array(buf), currentWeights[i].shape)
+    );
+    model.setWeights(restoredWeights);
+    restoredWeights.forEach((w) => w.dispose());
+    finalAccuracy = bestAccuracy;
+    finalValAccuracy = bestValAccuracy;
+  }
+
+  // Save model (invalidate prediction cache)
+  cachedClassifier = null;
   const modelDir = getModelDir(taskDir);
   ensureDir(modelDir);
 
@@ -190,6 +244,13 @@ export interface PredictionResult {
   allScores: { category: string; confidence: number }[];
 }
 
+// Cache for loaded classifier model to avoid re-reading from disk on every predict call
+let cachedClassifier: {
+  modelDir: string;
+  model: Awaited<ReturnType<Awaited<ReturnType<typeof loadTf>>['loadLayersModel']>>;
+  metadata: ClassifierMetadata;
+} | null = null;
+
 export async function predict(
   embedding: number[],
   taskDir: string
@@ -203,11 +264,20 @@ export async function predict(
     throw new Error('No trained model found. Run "expressible distill train" first.');
   }
 
-  const metadata: ClassifierMetadata = JSON.parse(
-    fs.readFileSync(metadataPath, 'utf-8')
-  );
+  let model: Awaited<ReturnType<typeof tf.loadLayersModel>>;
+  let metadata: ClassifierMetadata;
 
-  const model = await tf.loadLayersModel(fileIOHandler(modelDir));
+  if (cachedClassifier && cachedClassifier.modelDir === modelDir) {
+    model = cachedClassifier.model;
+    metadata = cachedClassifier.metadata;
+  } else {
+    if (cachedClassifier) {
+      cachedClassifier.model.dispose();
+    }
+    metadata = JSON.parse(fs.readFileSync(metadataPath, 'utf-8'));
+    model = await tf.loadLayersModel(fileIOHandler(modelDir));
+    cachedClassifier = { modelDir, model, metadata };
+  }
 
   const inputTensor = tf.tensor2d([embedding]);
   const output = model.predict(inputTensor) as ReturnType<typeof tf.tensor>;
@@ -223,7 +293,6 @@ export async function predict(
 
   inputTensor.dispose();
   output.dispose();
-  model.dispose();
 
   return {
     category: best.category,
