@@ -11,9 +11,7 @@ import path from 'node:path';
 import os from 'node:os';
 import { embedTexts, embedText } from '../../src/core/embeddings.js';
 import { trainClassifier, predict } from '../../src/core/classifier.js';
-import { saveRetrievalModel, retrievalPredict } from '../../src/core/retrieval.js';
 import { saveSample } from '../../src/core/data.js';
-import { ensureDir } from '../../src/utils/paths.js';
 
 interface Sample {
   input: string;
@@ -22,7 +20,7 @@ interface Sample {
 
 interface ScenarioConfig {
   name: string;
-  type: 'classify' | 'extract' | 'transform';
+  type: 'classify';
   dir: string;
 }
 
@@ -46,8 +44,6 @@ const SCENARIOS: ScenarioConfig[] = [
   { name: 'sentiment', type: 'classify', dir: 'sentiment' },
   { name: 'content-moderation', type: 'classify', dir: 'content-moderation' },
   { name: 'news-categorization', type: 'classify', dir: 'news-categorization' },
-  { name: 'email-extraction', type: 'extract', dir: 'email-extraction' },
-  { name: 'complaint-response', type: 'transform', dir: 'complaint-response' },
   // Public datasets
   { name: 'ag-news', type: 'classify', dir: 'ag-news' },
   { name: 'sst2-sentiment', type: 'classify', dir: 'sst2-sentiment' },
@@ -64,10 +60,10 @@ function createTempProject(name: string, type: string): string {
   return tmpDir;
 }
 
-function writeTrainingSamples(taskDir: string, samples: Sample[], isJson: boolean): void {
+function writeTrainingSamples(taskDir: string, samples: Sample[]): void {
   for (let i = 0; i < samples.length; i++) {
     const id = String(i + 1).padStart(3, '0');
-    saveSample(taskDir, id, samples[i].input, samples[i].output, isJson);
+    saveSample(taskDir, id, samples[i].input, samples[i].output, false);
   }
 }
 
@@ -79,7 +75,7 @@ async function runClassifyScenario(
   const taskDir = createTempProject(config.name, config.type);
 
   try {
-    writeTrainingSamples(taskDir, trainData, false);
+    writeTrainingSamples(taskDir, trainData);
 
     // Embed training data
     const trainTexts = trainData.map((s) => s.input);
@@ -128,96 +124,6 @@ async function runClassifyScenario(
   }
 }
 
-async function runRetrievalScenario(
-  config: ScenarioConfig,
-  trainData: Sample[],
-  testData: Sample[]
-): Promise<ScenarioResult> {
-  const taskDir = createTempProject(config.name, config.type);
-  const isJson = config.type === 'extract';
-
-  try {
-    writeTrainingSamples(taskDir, trainData, isJson);
-
-    // Embed training data
-    const trainTexts = trainData.map((s) => s.input);
-    const trainEmbeddings = await embedTexts(trainTexts, taskDir);
-
-    // Build retrieval model
-    saveRetrievalModel(trainEmbeddings, trainData, config.type, taskDir);
-
-    // Test
-    let correct = 0;
-    let totalConfidence = 0;
-    const failures: ScenarioResult['failures'] = [];
-
-    for (const test of testData) {
-      const embedding = await embedText(test.input, taskDir);
-      const result = retrievalPredict(embedding, taskDir);
-
-      totalConfidence += result.confidence;
-
-      // For extract: compare parsed JSON fields
-      // For transform: compare output similarity (loose match)
-      let isCorrect = false;
-
-      if (config.type === 'extract') {
-        isCorrect = compareJsonOutputs(test.output, result.output);
-      } else {
-        // Transform: check if semantically similar (loose — just check it's not returning garbage)
-        isCorrect = result.confidence > 0.5;
-      }
-
-      if (isCorrect) {
-        correct++;
-      } else {
-        failures.push({
-          input: test.input.slice(0, 80),
-          expected: test.output.slice(0, 60),
-          predicted: result.output.slice(0, 60),
-          confidence: Math.round(result.confidence * 1000) / 1000,
-        });
-      }
-    }
-
-    return {
-      name: config.name,
-      type: config.type,
-      trainCount: trainData.length,
-      testCount: testData.length,
-      correct,
-      total: testData.length,
-      accuracy: correct / testData.length,
-      avgConfidence: totalConfidence / testData.length,
-      failures,
-    };
-  } finally {
-    fs.rmSync(taskDir, { recursive: true, force: true });
-  }
-}
-
-function compareJsonOutputs(expected: string, predicted: string): boolean {
-  try {
-    const exp = JSON.parse(expected);
-    const pred = JSON.parse(predicted);
-
-    // Check if key fields match
-    const keys = Object.keys(exp);
-    let matchingFields = 0;
-
-    for (const key of keys) {
-      if (pred[key] && pred[key].toString().toLowerCase() === exp[key].toString().toLowerCase()) {
-        matchingFields++;
-      }
-    }
-
-    // Consider correct if >50% of fields match
-    return matchingFields / keys.length > 0.5;
-  } catch {
-    return false;
-  }
-}
-
 async function main() {
   console.log('='.repeat(70));
   console.log('  Distill Test Harness — Accuracy Benchmarks');
@@ -241,14 +147,7 @@ async function main() {
 
     console.log(`  RUN   ${scenario.name} (${scenario.type}) — ${trainData.length} train, ${testData.length} test`);
 
-    let result: ScenarioResult;
-
-    if (scenario.type === 'classify') {
-      result = await runClassifyScenario(scenario, trainData, testData);
-    } else {
-      result = await runRetrievalScenario(scenario, trainData, testData);
-    }
-
+    const result = await runClassifyScenario(scenario, trainData, testData);
     results.push(result);
 
     const pct = (result.accuracy * 100).toFixed(1);
@@ -302,34 +201,23 @@ async function main() {
   console.log();
 
   // Overall stats
-  const classifyResults = results.filter((r) => r.type === 'classify');
-  if (classifyResults.length > 0) {
-    const totalCorrect = classifyResults.reduce((sum, r) => sum + r.correct, 0);
-    const totalTests = classifyResults.reduce((sum, r) => sum + r.total, 0);
-    const overallAcc = ((totalCorrect / totalTests) * 100).toFixed(1);
-    console.log(`  Classification overall: ${overallAcc}% (${totalCorrect}/${totalTests})`);
-  }
-
-  const retrievalResults = results.filter((r) => r.type !== 'classify');
-  if (retrievalResults.length > 0) {
-    const totalCorrect = retrievalResults.reduce((sum, r) => sum + r.correct, 0);
-    const totalTests = retrievalResults.reduce((sum, r) => sum + r.total, 0);
-    const overallAcc = ((totalCorrect / totalTests) * 100).toFixed(1);
-    console.log(`  Retrieval overall: ${overallAcc}% (${totalCorrect}/${totalTests})`);
-  }
+  const totalCorrect = results.reduce((sum, r) => sum + r.correct, 0);
+  const totalTests = results.reduce((sum, r) => sum + r.total, 0);
+  const overallAcc = ((totalCorrect / totalTests) * 100).toFixed(1);
+  console.log(`  Overall: ${overallAcc}% (${totalCorrect}/${totalTests})`);
 
   console.log();
 
-  // Exit code based on classify accuracy
-  const classifyAvg = classifyResults.length > 0
-    ? classifyResults.reduce((sum, r) => sum + r.accuracy, 0) / classifyResults.length
+  // Exit code based on accuracy
+  const classifyAvg = results.length > 0
+    ? results.reduce((sum, r) => sum + r.accuracy, 0) / results.length
     : 0;
 
   if (classifyAvg < 0.7) {
-    console.log('  ✗ Classification accuracy below 70% threshold');
+    console.log('  ✗ Accuracy below 70% threshold');
     process.exit(1);
   } else {
-    console.log('  ✓ Classification accuracy meets threshold');
+    console.log('  ✓ Accuracy meets threshold');
   }
 }
 

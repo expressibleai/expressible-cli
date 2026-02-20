@@ -6,13 +6,10 @@ import {
   createTestProject,
   addClassifySamples,
   CLASSIFY_SAMPLES,
-  EXTRACT_SAMPLES,
-  addExtractSamples,
   type TestProject,
 } from './helpers/test-project.js';
-import { mockClusteredEmbed, mockEmbed } from './helpers/mock-embeddings.js';
+import { mockClusteredEmbed } from './helpers/mock-embeddings.js';
 import { trainClassifier } from '../src/core/classifier.js';
-import { saveRetrievalModel } from '../src/core/retrieval.js';
 import { loadSamples } from '../src/core/data.js';
 import { exportCommand } from '../src/commands/export.js';
 
@@ -70,33 +67,4 @@ describe('export command', () => {
     expect(pkg.dependencies).toHaveProperty('@xenova/transformers');
   });
 
-  it('should export retrieval model files and inference script', async () => {
-    project = createTestProject('extract', 'export-extract');
-    addExtractSamples(project.dir, EXTRACT_SAMPLES);
-
-    const samples = loadSamples(project.dir);
-    const embeddings = samples.map((s) => mockEmbed(s.input));
-    saveRetrievalModel(embeddings, samples, 'extract', project.dir);
-
-    exportDir = fs.mkdtempSync(path.join(os.tmpdir(), 'distill-export-'));
-
-    const originalCwd = process.cwd();
-    process.chdir(project.dir);
-    try {
-      await exportCommand(exportDir);
-    } finally {
-      process.chdir(originalCwd);
-    }
-
-    expect(fs.existsSync(path.join(exportDir, 'retrieval_model.json'))).toBe(true);
-    expect(fs.existsSync(path.join(exportDir, 'metadata.json'))).toBe(true);
-    expect(fs.existsSync(path.join(exportDir, 'inference.js'))).toBe(true);
-
-    const inferenceScript = fs.readFileSync(
-      path.join(exportDir, 'inference.js'),
-      'utf-8'
-    );
-    expect(inferenceScript).toContain('cosineSimilarity');
-    expect(inferenceScript).toContain('retrieval_model.json');
-  });
 });

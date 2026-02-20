@@ -42,8 +42,6 @@ npm install -g expressible
 
 ```bash
 expressible distill init clause-detector
-# Select: classify
-
 cd clause-detector
 ```
 
@@ -141,10 +139,6 @@ Everything.
 
 **Legal document review** — Classify contract clauses by type across thousands of agreements. Privileged documents stay within your perimeter.
 
-**Invoice data extraction** — Pull vendor, amount, date, and line items from invoices in varying formats. Financial data never touches an external API.
-
-**Resume parsing** — Extract structured candidate data from resumes. PII stays internal, meeting data handling obligations.
-
 **Log analysis and alerting** — Classify application logs as normal, warning, error, security event, or performance degradation. Thousands per hour, entirely local.
 
 **Content moderation** — Classify user-generated content against your community guidelines. Consistent categories, high volume.
@@ -185,13 +179,13 @@ Accuracy improves as you add more examples through the review-retrain loop. Full
 
 ---
 
-### Task Types
+### Task Type
+
+Distill trains **classification** models: text in, one of N categories out.
 
 | Type | Input → Output | Example |
 |------|---------------|---------|
 | **classify** | Text → one of N categories | Contract clause → `indemnification` |
-| **extract** | Text → structured JSON | Invoice → `{ "vendor": "...", "total": "..." }` |
-| **transform** | Text → text | Complaint → templated response |
 
 ### Commands
 
@@ -222,7 +216,7 @@ expressible distill setup           Pre-download embedding model for offline use
 No. This replaces the *repetitive, pattern-based* subset of LLM calls — the ones where the same prompt structure processes different data every time. For tasks that require reasoning, creativity, or open-ended generation, you still want an LLM.
 
 **How many examples do I need?**
-10 minimum for classification, 20 for extraction/transformation. In practice, 50–100 examples with good coverage of your categories will give you strong results.
+10 minimum. In practice, 50–100 examples with good coverage of your categories will give you strong results.
 
 **How accurate is it?**
 For well-defined classification tasks with clear categories and 50+ examples, 85–95% accuracy is typical. The review → retrain loop lets you improve iteratively.

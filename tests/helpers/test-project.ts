@@ -47,16 +47,6 @@ export function addClassifySamples(
   }
 }
 
-export function addExtractSamples(
-  dir: string,
-  samples: { input: string; output: string }[]
-): void {
-  for (let i = 0; i < samples.length; i++) {
-    const id = String(i + 1).padStart(3, '0');
-    saveSample(dir, id, samples[i].input, samples[i].output, true);
-  }
-}
-
 export const CLASSIFY_SAMPLES = [
   { input: 'I love this product', output: 'positive' },
   { input: 'Amazing experience', output: 'positive' },
@@ -72,16 +62,3 @@ export const CLASSIFY_SAMPLES = [
   { input: 'Average quality nothing special', output: 'neutral' },
 ];
 
-export const EXTRACT_SAMPLES = Array.from({ length: 20 }, (_, i) => ({
-  input: `Customer order #${1000 + i}: bought ${i % 2 === 0 ? 'laptop' : 'phone'} on ${i % 3 === 0 ? 'Monday' : 'Friday'}`,
-  output: JSON.stringify({
-    orderId: 1000 + i,
-    product: i % 2 === 0 ? 'laptop' : 'phone',
-    day: i % 3 === 0 ? 'Monday' : 'Friday',
-  }),
-}));
-
-export const TRANSFORM_SAMPLES = Array.from({ length: 20 }, (_, i) => ({
-  input: `Dear Sir/Madam, I am writing regarding order #${1000 + i}. The item arrived damaged. Please advise.`,
-  output: `Thank you for contacting us about order #${1000 + i}. We apologize for the damaged item. A replacement will be shipped within 2 business days.`,
-}));

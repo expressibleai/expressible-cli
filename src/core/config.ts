@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import { getConfigPath } from '../utils/paths.js';
 
-export type TaskType = 'classify' | 'extract' | 'transform';
+export type TaskType = 'classify';
 
 export interface DistillConfig {
   name: string;

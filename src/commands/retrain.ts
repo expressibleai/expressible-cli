@@ -5,7 +5,6 @@ import { readConfig } from '../core/config.js';
 import { loadSamples, loadValidationResults, getUniqueOutputCategories } from '../core/data.js';
 import { embedTexts } from '../core/embeddings.js';
 import { trainClassifier } from '../core/classifier.js';
-import { saveRetrievalModel, evaluateRetrievalAccuracy } from '../core/retrieval.js';
 import { success, error, warn, info, heading, table } from '../utils/display.js';
 import type { SamplePair } from '../core/data.js';
 
@@ -86,15 +85,14 @@ export async function retrainCommand(): Promise<void> {
     info(`${excludedFromReview} rejected items excluded (no correction provided)`);
   }
 
-  const minSamples = config.type === 'classify' ? 10 : 20;
-  if (trainingSamples.length < minSamples) {
+  if (trainingSamples.length < 10) {
     error(
-      `Not enough training samples (${trainingSamples.length}). ${config.type} tasks require at least ${minSamples}.`
+      `Not enough training samples (${trainingSamples.length}). At least 10 are required.`
     );
     process.exit(1);
   }
 
-  heading(`Retraining ${config.type} model "${config.name}"`);
+  heading(`Retraining model "${config.name}"`);
 
   const startTime = Date.now();
 
@@ -103,14 +101,9 @@ export async function retrainCommand(): Promise<void> {
 
   let newAccuracy: number;
 
-  if (config.type === 'classify') {
-    const labels = trainingSamples.map((s) => s.output);
-    const result = await trainClassifier(embeddings, labels, taskDir);
-    newAccuracy = result.valAccuracy;
-  } else {
-    saveRetrievalModel(embeddings, trainingSamples, config.type, taskDir);
-    newAccuracy = evaluateRetrievalAccuracy(embeddings, trainingSamples);
-  }
+  const labels = trainingSamples.map((s) => s.output);
+  const result = await trainClassifier(embeddings, labels, taskDir);
+  newAccuracy = result.valAccuracy;
 
   const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
 

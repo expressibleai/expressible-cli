@@ -11,7 +11,6 @@ import { readConfig } from '../src/core/config.js';
 import { loadSamples, getNextSampleId, saveSample, loadValidationResults } from '../src/core/data.js';
 import { findTaskDir } from '../src/utils/paths.js';
 import { predict } from '../src/core/classifier.js';
-import { loadRetrievalModel } from '../src/core/retrieval.js';
 import { mockEmbed } from './helpers/mock-embeddings.js';
 
 describe('error handling: config', () => {
@@ -52,12 +51,6 @@ describe('error handling: model not trained', () => {
     const embedding = mockEmbed('test input');
     await expect(predict(embedding, project.dir)).rejects.toThrow(
       'No trained model found'
-    );
-  });
-
-  it('should throw when loading retrieval model that does not exist', () => {
-    expect(() => loadRetrievalModel(project.dir)).toThrow(
-      'No trained retrieval model found'
     );
   });
 });

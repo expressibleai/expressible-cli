@@ -3,7 +3,6 @@ import path from 'node:path';
 import readline from 'node:readline';
 import inquirer from 'inquirer';
 import { findTaskDir, getSamplesDir, ensureDir } from '../utils/paths.js';
-import { readConfig } from '../core/config.js';
 import { getNextSampleId, saveSample, loadSamples } from '../core/data.js';
 import { success, error, info } from '../utils/display.js';
 
@@ -15,7 +14,6 @@ interface AddOptions {
 
 export async function addCommand(options: AddOptions): Promise<void> {
   const taskDir = findTaskDir();
-  const config = readConfig(taskDir);
 
   if (options.dir) {
     await bulkImport(taskDir, options.dir);
@@ -27,7 +25,7 @@ export async function addCommand(options: AddOptions): Promise<void> {
     return;
   }
 
-  await addInteractive(taskDir, config.type);
+  await addInteractive(taskDir);
 }
 
 function readMultilineInput(prompt: string): Promise<string> {
@@ -58,9 +56,7 @@ function readMultilineInput(prompt: string): Promise<string> {
   });
 }
 
-async function addInteractive(taskDir: string, taskType: string): Promise<void> {
-  const isClassify = taskType === 'classify';
-
+async function addInteractive(taskDir: string): Promise<void> {
   while (true) {
     const samples = loadSamples(taskDir);
     info(`Current samples: ${samples.length}`);
@@ -71,16 +67,10 @@ async function addInteractive(taskDir: string, taskType: string): Promise<void> 
       break;
     }
 
-    let output: string;
-
-    if (isClassify) {
-      const { output: rawOutput } = await inquirer.prompt([
-        { type: 'input', name: 'output', message: 'Label:' },
-      ]);
-      output = rawOutput.trim();
-    } else {
-      output = (await readMultilineInput('? Paste expected output (blank line to end):\n')).trim();
-    }
+    const { output: rawOutput } = await inquirer.prompt([
+      { type: 'input', name: 'output', message: 'Label:' },
+    ]);
+    const output = rawOutput.trim();
 
     if (!output) {
       error('Output is required. Skipping this sample.');
@@ -88,8 +78,7 @@ async function addInteractive(taskDir: string, taskType: string): Promise<void> 
     }
 
     const id = getNextSampleId(taskDir);
-    const isJson = taskType === 'extract';
-    saveSample(taskDir, id, input, output, isJson);
+    saveSample(taskDir, id, input, output, false);
     success(`Saved sample ${id}`);
   }
 }

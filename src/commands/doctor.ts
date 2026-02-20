@@ -83,11 +83,10 @@ export async function doctorCommand(): Promise<void> {
       const samplesDir = path.join(process.cwd(), 'samples');
       if (fs.existsSync(samplesDir)) {
         const inputFiles = fs.readdirSync(samplesDir).filter((f) => f.includes('.input.'));
-        const minSamples = config.type === 'classify' ? 10 : 20;
-        if (inputFiles.length >= minSamples) {
-          checks.push({ name: 'Training samples', status: 'pass', message: `${inputFiles.length} samples (minimum ${minSamples})` });
+        if (inputFiles.length >= 10) {
+          checks.push({ name: 'Training samples', status: 'pass', message: `${inputFiles.length} samples (minimum 10)` });
         } else {
-          checks.push({ name: 'Training samples', status: 'warn', message: `${inputFiles.length} samples — need at least ${minSamples} for ${config.type}` });
+          checks.push({ name: 'Training samples', status: 'warn', message: `${inputFiles.length} samples — need at least 10` });
         }
       }
 

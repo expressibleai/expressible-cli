@@ -4,6 +4,7 @@ import { findTaskDir, getModelDir, getModelMetadataPath, ensureDir } from '../ut
 import { readConfig } from '../core/config.js';
 import { success, error, info } from '../utils/display.js';
 
+
 export async function exportCommand(outputDir: string): Promise<void> {
   const taskDir = findTaskDir();
   const config = readConfig(taskDir);
@@ -29,10 +30,7 @@ export async function exportCommand(outputDir: string): Promise<void> {
   }
 
   // Generate standalone inference script
-  const metadata = JSON.parse(fs.readFileSync(metadataPath, 'utf-8'));
-  const isClassifier = metadata.type === 'classifier';
-
-  const inferenceScript = generateInferenceScript(isClassifier, config.type);
+  const inferenceScript = generateInferenceScript();
   fs.writeFileSync(
     path.join(resolvedDir, 'inference.js'),
     inferenceScript,
@@ -61,9 +59,8 @@ export async function exportCommand(outputDir: string): Promise<void> {
   info('To use: npm install && node inference.js "your input text"');
 }
 
-function generateInferenceScript(isClassifier: boolean, taskType: string): string {
-  if (isClassifier) {
-    return `#!/usr/bin/env node
+function generateInferenceScript(): string {
+  return `#!/usr/bin/env node
 // Standalone inference script for distill classifier model
 // Usage: node inference.js "your input text"
 // Requires: npm install @tensorflow/tfjs-node @xenova/transformers
@@ -119,71 +116,6 @@ async function main() {
   inputTensor.dispose();
   output.dispose();
   model.dispose();
-}
-
-main().catch(err => {
-  console.error('Inference failed:', err.message);
-  process.exit(1);
-});
-`;
-  }
-
-  return `#!/usr/bin/env node
-// Standalone inference script for distill ${taskType} model (retrieval-based)
-// Usage: node inference.js "your input text"
-// Requires: npm install @xenova/transformers
-
-import { pipeline, env } from '@xenova/transformers';
-import { readFileSync } from 'fs';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-function cosineSimilarity(a, b) {
-  let dot = 0, normA = 0, normB = 0;
-  for (let i = 0; i < a.length; i++) {
-    dot += a[i] * b[i];
-    normA += a[i] * a[i];
-    normB += b[i] * b[i];
-  }
-  const denom = Math.sqrt(normA) * Math.sqrt(normB);
-  return denom === 0 ? 0 : dot / denom;
-}
-
-async function main() {
-  const input = process.argv[2];
-  if (!input) {
-    console.error('Usage: node inference.js "your input text"');
-    process.exit(1);
-  }
-
-  // Load retrieval model
-  const modelData = JSON.parse(readFileSync(join(__dirname, 'retrieval_model.json'), 'utf-8'));
-
-  // Load embedding model
-  env.allowLocalModels = true;
-  const extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
-
-  // Embed input
-  const result = await extractor(input, { pooling: 'mean', normalize: true });
-  const queryEmbedding = result.tolist()[0];
-
-  // Find most similar
-  const similarities = modelData.embeddings.map((emb, i) => ({
-    index: i,
-    similarity: cosineSimilarity(queryEmbedding, emb),
-  }));
-  similarities.sort((a, b) => b.similarity - a.similarity);
-  const best = similarities[0];
-  const sample = modelData.samples[best.index];
-
-  console.log(JSON.stringify({
-    input,
-    output: sample.output,
-    confidence: Math.round(best.similarity * 1000) / 1000,
-  }, null, 2));
 }
 
 main().catch(err => {

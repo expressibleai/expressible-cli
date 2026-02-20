@@ -43,24 +43,15 @@ These use real text from established ML benchmarks. Samples are included in the 
 
 **Doesn't work well (~55%):** Sentiment and tone classification. "This camera takes amazing photos" and "This camera takes terrible photos" are semantically almost identical — same topic, same structure. The embedding vectors land close together regardless of the evaluation. Both SST-2 (public dataset, 56%) and our synthetic sentiment scenario (55%) confirm this is a fundamental property of the approach, not a data issue.
 
-### Extraction and Transformation (Experimental)
-
-| Scenario | Train | Test | Accuracy | Avg Confidence |
-|---|---|---|---|---|
-| Email field extraction | 20 | 10 | 0.0% | 39.4% |
-| Complaint response generation | 20 | 10 | 10.0% | 40.2% |
-
-Extract and transform use a retrieval-based approach that finds the most similar training example and returns its stored output. This cannot generalize to new inputs — it copies old answers rather than extracting from new text. These task types are experimental.
-
 ## Methodology
 
 Each scenario uses:
 
-- **Training set**: 50 labeled examples (20 for extract/transform) with balanced class distribution
+- **Training set**: 50 labeled examples with balanced class distribution
 - **Test set**: 20–25 held-out examples the model has never seen, including deliberate edge cases
 - **Embeddings**: [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) sentence embeddings (384-dimensional)
 - **Classification model**: Two-layer neural network (128 + 64 units, ReLU, dropout 0.2, softmax output) trained with early stopping
-- **Scoring**: Exact label match for classification. For extraction, >50% of JSON fields must match. For transformation, confidence threshold of 0.5.
+- **Scoring**: Exact label match
 
 Training and test data are fully separated. No test input appears in the training set.
 
@@ -83,12 +74,6 @@ Classify user-generated content as safe, offensive, or spam. Test set includes a
 
 ### News categorization
 Classify news headlines into: politics, sports, technology, entertainment, business. Test set includes cross-category edge cases like esports (sports vs technology), tech company IPOs (technology vs business), and political documentaries (politics vs entertainment).
-
-### Email field extraction
-Extract sender, subject, date, and intent from raw email text as structured JSON. Test set includes forwarded emails, missing headers, and multi-level reply chains.
-
-### Complaint response generation
-Generate professional, empathetic responses to customer complaints. Test set uses entirely different complaint scenarios from training.
 
 ## Run It Yourself
 
