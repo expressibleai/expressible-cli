@@ -10,10 +10,16 @@ interface AddOptions {
   input?: string;
   output?: string;
   dir?: string;
+  file?: string;
 }
 
 export async function addCommand(options: AddOptions): Promise<void> {
   const taskDir = findTaskDir();
+
+  if (options.file) {
+    await importFromFile(taskDir, options.file);
+    return;
+  }
 
   if (options.dir) {
     await bulkImport(taskDir, options.dir);
@@ -107,6 +113,73 @@ async function addFromFiles(
   const isJson = resolvedOutput.endsWith('.json');
   saveSample(taskDir, id, input, output, isJson);
   success(`Saved sample ${id} from files`);
+}
+
+async function importFromFile(taskDir: string, filePath: string): Promise<void> {
+  const resolvedPath = path.resolve(filePath);
+
+  if (!fs.existsSync(resolvedPath)) {
+    error(`File not found: ${resolvedPath}`);
+    process.exit(1);
+  }
+
+  if (!resolvedPath.endsWith('.json')) {
+    error('Only JSON files are supported. Expected a .json file.');
+    process.exit(1);
+  }
+
+  let raw: string;
+  try {
+    raw = fs.readFileSync(resolvedPath, 'utf-8');
+  } catch (err) {
+    error(`Could not read file: ${resolvedPath}`);
+    process.exit(1);
+  }
+
+  let data: unknown;
+  try {
+    data = JSON.parse(raw);
+  } catch {
+    error('Invalid JSON. Expected an array of { "input": "...", "output": "..." } objects.');
+    process.exit(1);
+  }
+
+  if (!Array.isArray(data)) {
+    error('Expected a JSON array of { "input": "...", "output": "..." } objects.');
+    process.exit(1);
+  }
+
+  let imported = 0;
+  let skipped = 0;
+
+  for (let i = 0; i < data.length; i++) {
+    const item = data[i];
+
+    if (!item || typeof item.input !== 'string' || typeof item.output !== 'string') {
+      info(`Skipping row ${i + 1} — missing or invalid "input"/"output" fields.`);
+      skipped++;
+      continue;
+    }
+
+    const input = item.input.trim();
+    const output = item.output.trim();
+
+    if (!input || !output) {
+      info(`Skipping row ${i + 1} — empty input or output.`);
+      skipped++;
+      continue;
+    }
+
+    const id = getNextSampleId(taskDir);
+    saveSample(taskDir, id, input, output, false);
+    imported++;
+  }
+
+  if (skipped > 0) {
+    info(`${skipped} row(s) skipped due to missing or empty fields.`);
+  }
+
+  success(`Imported ${imported} sample(s) from ${path.basename(resolvedPath)}`);
 }
 
 async function bulkImport(taskDir: string, dirPath: string): Promise<void> {
