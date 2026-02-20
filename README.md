@@ -159,12 +159,15 @@ Measured on held-out test data the model has never seen, with 50 training sample
 
 | Scenario | Accuracy |
 |---|---|
-| Content moderation (safe / offensive / spam) | 95.0% |
-| Support ticket routing (billing / technical / account / shipping) | 90.0% |
-| News categorization (politics / sports / tech / entertainment / business) | 84.0% |
-| Sentiment analysis (positive / negative / neutral) | 65.0% |
+| News categorization (5 categories) | 96.0% |
+| Support ticket routing (4 categories) | 90.0% |
+| Content moderation (3 categories) | 90.0% |
+| 20 Newsgroups — public dataset (5 categories) | 87.0% |
+| AG News — public dataset (4 categories) | 76.0% |
 
-Full results, methodology, and instructions for running the test harness: **[docs/benchmarks.md](docs/benchmarks.md)**
+Public dataset benchmarks use real data from [AG News](https://huggingface.co/datasets/fancyzhx/ag_news) and [20 Newsgroups](https://huggingface.co/datasets/SetFit/20_newsgroups). Samples are included in the repo — run `npx tsx tests/harness/run.ts` to reproduce.
+
+Full results, methodology, and all scenarios: **[docs/benchmarks.md](docs/benchmarks.md)**
 
 ---
 

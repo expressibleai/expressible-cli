@@ -41,12 +41,17 @@ interface ScenarioResult {
 const FIXTURES_DIR = path.join(import.meta.dirname, 'fixtures');
 
 const SCENARIOS: ScenarioConfig[] = [
+  // Synthetic scenarios
   { name: 'support-tickets', type: 'classify', dir: 'support-tickets' },
   { name: 'sentiment', type: 'classify', dir: 'sentiment' },
   { name: 'content-moderation', type: 'classify', dir: 'content-moderation' },
   { name: 'news-categorization', type: 'classify', dir: 'news-categorization' },
   { name: 'email-extraction', type: 'extract', dir: 'email-extraction' },
   { name: 'complaint-response', type: 'transform', dir: 'complaint-response' },
+  // Public datasets
+  { name: 'ag-news', type: 'classify', dir: 'ag-news' },
+  { name: 'sst2-sentiment', type: 'classify', dir: 'sst2-sentiment' },
+  { name: '20newsgroups', type: 'classify', dir: '20newsgroups' },
 ];
 
 function createTempProject(name: string, type: string): string {
