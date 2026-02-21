@@ -2,13 +2,7 @@
 
 Open-source developer tools by [Expressible AI, Inc.](https://expressible.ai)
 
-The Expressible CLI provides local-first tooling for AI workflows where data sovereignty matters. It is part of the [Expressible platform](https://expressible.ai) for secure, end-to-end software delivery.
-
-| Tool | Status | Description |
-|------|--------|-------------|
-| **distill** | Available | Train local ML models from examples |
-| **govern** | Coming soon | Model traceability, audit trails, and policy enforcement |
-| **enclave** | Coming soon | Secure execution environment for local model inference |
+The Expressible CLI provides local-first tooling for AI workflows where data sovereignty matters. It is part of the [Expressible platform](https://gen.expressible.ai) for secure, end-to-end software delivery.
 
 ---
 
@@ -25,7 +19,7 @@ $ expressible distill run "The Vendor shall indemnify and hold harmless the Clie
   "confidence": 0.96
 }
 
-Classified locally. No API call. Model is 400KB on disk.
+Classified locally. No API call. Model is ~230KB on disk.
 ```
 
 No cloud. No API keys. No external calls. No ML expertise required.
@@ -158,11 +152,13 @@ With 50 labeled examples (~30 minutes of work), no API keys, and no ML expertise
 
 | Scenario | Accuracy | Data Source |
 |---|---|---|
-| News categorization (5 categories) | 96.0% | Synthetic |
-| Content moderation (3 categories) | 95.0% | Synthetic |
 | Support ticket routing (4 categories) | 95.0% | Synthetic |
-| 20 Newsgroups (5 categories) | 87.0% | [Public dataset](https://huggingface.co/datasets/SetFit/20_newsgroups) |
-| AG News (4 categories) | 76.0% | [Public dataset](https://huggingface.co/datasets/fancyzhx/ag_news) |
+| Content moderation (3 categories) | 90.0% | Synthetic |
+| News categorization (5 categories) | 88.0% | Synthetic |
+| 20 Newsgroups (5 categories) | 80.0% | [Public dataset](https://huggingface.co/datasets/SetFit/20_newsgroups) |
+| AG News (4 categories) | 64.0% | [Public dataset](https://huggingface.co/datasets/fancyzhx/ag_news) |
+
+AG News improves to 80% with 100 training samples. More data helps — see [benchmarks](docs/benchmarks.md) for scaling details.
 
 Public dataset results use real-world text from established ML benchmarks — 50 samples drawn from datasets containing 120,000+ entries. All samples and the test harness are included in the repo so you can reproduce these results:
 
