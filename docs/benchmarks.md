@@ -2,7 +2,7 @@
 
 ## What This Means for You
 
-Label 50 examples. Train a model. Get 64–95% accuracy on text classification — with no API keys, no cloud, and no ML expertise.
+Label 50 examples. Train a model. Get 64–95% accuracy on topic classification — with no API keys, no cloud, and no ML expertise.
 
 These benchmarks measure what happens when you give Distill 50 labeled examples and test it on text it has never seen. That's roughly 30 minutes of labeling work. The public dataset results use real-world text from datasets containing 120,000+ entries — we only used 50 samples from each. Anyone can reproduce these numbers by cloning the repo and running the test harness.
 
@@ -15,9 +15,9 @@ Distill works best for **topic and domain classification** — deciding *what ki
 | Scenario | Train | Test | Accuracy | Avg Confidence |
 |---|---|---|---|---|
 | Support ticket routing | 51 | 20 | **95.0%** | 91.1% |
-| Content moderation | 50 | 20 | **95.0%** | 89.2% |
+| Content moderation | 50 | 20 | **90.0%** | 89.2% |
 | News categorization | 50 | 25 | **88.0%** | 70.4% |
-| Sentiment analysis | 50 | 20 | 55.0% | 60.6% |
+| Sentiment analysis | 50 | 20 | 50.0% | 60.6% |
 
 ### Classification — Public Datasets
 
@@ -25,25 +25,25 @@ These use real text from established ML benchmarks. Samples are included in the 
 
 | Dataset | Full Size | Train Used | Test | Accuracy | Avg Confidence |
 |---|---|---|---|---|---|
-| [20 Newsgroups](http://qwone.com/~jason/20Newsgroups/) (5 categories) | ~18,800 | 50 | 25 | **84.0%** | 79.0% |
-| [SST-2](https://huggingface.co/datasets/stanfordnlp/sst2) (2 categories) | 68,221 | 50 | 25 | 72.0% | 55.8% |
+| [20 Newsgroups](http://qwone.com/~jason/20Newsgroups/) (5 categories) | ~18,800 | 50 | 25 | **80.0%** | 79.0% |
+| [SST-2](https://huggingface.co/datasets/stanfordnlp/sst2) (2 categories) | 68,221 | 50 | 25 | 44.0% | 55.8% |
 | [AG News](https://huggingface.co/datasets/fancyzhx/ag_news) (4 categories) | 127,600 | 50 | 25 | 64.0% | 76.4% |
 
 ### Classification Overall
 
 | Group | Correct | Total | Accuracy |
 |---|---|---|---|
-| Synthetic (excl. sentiment) | 60 | 65 | **92.3%** |
-| Public datasets (excl. SST-2) | 37 | 50 | **74.0%** |
-| All classification | 126 | 160 | **78.8%** |
+| Synthetic (excl. sentiment) | 59 | 65 | **90.8%** |
+| Public datasets (excl. SST-2) | 36 | 50 | **72.0%** |
+| All classification | 116 | 160 | **72.5%** |
 
 ### What works and what doesn't
 
-**Works well (84–95%):** Tasks where categories are semantically distinct — the text is *about* different things. Support tickets about billing vs shipping. News about sports vs politics. Forum posts about cars vs space exploration. The embedding model captures topic differences effectively, and a small neural network learns the boundaries with minimal data.
+**Works well (80–95%):** Tasks where categories are semantically distinct — the text is *about* different things. Support tickets about billing vs shipping. News about sports vs politics. Forum posts about cars vs space exploration. The embedding model captures topic differences effectively, and a small neural network learns the boundaries with minimal data.
 
-**Moderate (64–72%):** Real-world datasets with noisy or overlapping categories. AG News (64%) and SST-2 (72%) score lower because 50 training samples provide limited coverage of large, diverse corpora. AG News improves to 80% with 100 training samples.
+**Moderate (~64%):** Real-world datasets with noisy or overlapping categories. AG News (64%) scores lower because 50 training samples provide limited coverage of a large, diverse corpus. AG News improves to 80% with 100 training samples.
 
-**Doesn't work well (~55%):** Sentiment and tone classification. "This camera takes amazing photos" and "This camera takes terrible photos" are semantically almost identical — same topic, same structure. The embedding vectors land close together regardless of the evaluation. Both SST-2 (public dataset, 72%) and our synthetic sentiment scenario (55%) confirm this is a fundamental limitation of the embedding approach.
+**Doesn't work well (44–50%):** Sentiment and tone classification. "This camera takes amazing photos" and "This camera takes terrible photos" are semantically almost identical — same topic, same structure. The embedding vectors land close together regardless of the evaluation. Both SST-2 (public dataset, 44%) and our synthetic sentiment scenario (50%) confirm this is a fundamental limitation of the embedding approach.
 
 ## Methodology
 
@@ -109,7 +109,7 @@ Doubling the training data raised accuracy by 16 points and halved the variance.
 
 ## Notes
 
-- Published accuracy reflects the lowest result across 5 independent runs. Most runs score higher. Variance comes from random weight initialization in the neural network; train/val splits are deterministic.
+- Published accuracy reflects the lowest result observed across multiple independent runs. Most runs score higher. Variance comes from random weight initialization in the neural network; train/val splits are deterministic.
 - Accuracy improves as you add more examples through the review-retrain loop — these benchmarks capture one-shot accuracy only
 - You need at least 10 examples to start. 50+ gives the results shown here
 - Sentiment/tone classification is a known limitation — the embedding model captures semantic meaning, not evaluative framing
