@@ -158,11 +158,14 @@ With 50 labeled examples (~30 minutes of work), no API keys, and no ML expertise
 
 | Scenario | Accuracy | Data Source |
 |---|---|---|
-| News categorization (5 categories) | 96.0% | Synthetic |
-| Content moderation (3 categories) | 95.0% | Synthetic |
 | Support ticket routing (4 categories) | 95.0% | Synthetic |
-| 20 Newsgroups (5 categories) | 87.0% | [Public dataset](https://huggingface.co/datasets/SetFit/20_newsgroups) |
-| AG News (4 categories) | 76.0% | [Public dataset](https://huggingface.co/datasets/fancyzhx/ag_news) |
+| Content moderation (3 categories) | 95.0% | Synthetic |
+| News categorization (5 categories) | 88.0% | Synthetic |
+| 20 Newsgroups (5 categories) | 84.0% | [Public dataset](https://huggingface.co/datasets/SetFit/20_newsgroups) |
+| SST-2 sentiment (2 categories) | 72.0% | [Public dataset](https://huggingface.co/datasets/stanfordnlp/sst2) |
+| AG News (4 categories) | 64.0% | [Public dataset](https://huggingface.co/datasets/fancyzhx/ag_news) |
+
+AG News improves to 80% with 100 training samples. More data helps — see [benchmarks](docs/benchmarks.md) for scaling details.
 
 Public dataset results use real-world text from established ML benchmarks — 50 samples drawn from datasets containing 120,000+ entries. All samples and the test harness are included in the repo so you can reproduce these results:
 
