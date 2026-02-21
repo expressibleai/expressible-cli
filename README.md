@@ -25,7 +25,7 @@ $ expressible distill run "The Vendor shall indemnify and hold harmless the Clie
   "confidence": 0.96
 }
 
-Classified locally. No API call. Model is 400KB on disk.
+Classified locally. No API call. Model is ~230KB on disk.
 ```
 
 No cloud. No API keys. No external calls. No ML expertise required.
