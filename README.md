@@ -2,7 +2,7 @@
 
 Open-source developer tools by [Expressible AI, Inc.](https://expressible.ai)
 
-The Expressible CLI provides local-first tooling for AI workflows where data sovereignty matters. It is part of the [Expressible platform](https://expressible.ai) for secure, end-to-end software delivery.
+The Expressible CLI provides local-first tooling for AI workflows where data sovereignty matters. It is part of the [Expressible platform](https://gen.expressible.ai) for secure, end-to-end software delivery.
 
 ---
 
