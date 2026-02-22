@@ -1,6 +1,6 @@
 {
   "name": "expressible",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Open-source CLI toolkit by Expressible AI, Inc.",
   "type": "module",
   "main": "dist/index.js",
@@ -37,8 +37,7 @@
   "files": [
     "dist/",
     "LICENSE",
-    "README.md",
-    "demo.svg"
+    "README.md"
   ],
   "engines": {
     "node": ">=18.0.0"
