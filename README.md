@@ -10,7 +10,7 @@ The Expressible CLI provides local-first tooling for AI workflows where data sov
 
 Train small, task-specific ML models from input/output examples. Runs entirely on your machine. Your data never leaves your environment.
 
-![Expressible Distill demo](demo.svg)
+![Expressible Distill demo](https://raw.githubusercontent.com/expressibleai/expressible-cli/main/demo.svg)
 
 ```
 $ expressible distill run "The Vendor shall indemnify and hold harmless the Client
