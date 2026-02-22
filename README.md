@@ -12,7 +12,17 @@ Train small, task-specific ML models from input/output examples. Runs entirely o
 
 ![Expressible Distill demo](demo.svg)
 
+```
+$ expressible distill run "The Vendor shall indemnify and hold harmless the Client
+  from all claims, damages, and expenses arising from breach of this Agreement"
+
+{
+  "output": "indemnification",
+  "confidence": 0.96
+}
+
 Classified locally. No API call. Model is ~230KB on disk.
+```
 
 No cloud. No API keys. No external calls. No ML expertise required.
 

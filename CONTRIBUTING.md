@@ -5,7 +5,7 @@ Thanks for your interest in contributing.
 ## Getting Started
 
 ```bash
-git clone https://github.com/expressible-ai/expressible-cli.git
+git clone https://github.com/expressibleai/expressible-cli.git
 cd expressible-cli
 npm install
 npm run build
