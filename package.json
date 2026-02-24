@@ -1,7 +1,7 @@
 {
   "name": "expressible",
-  "version": "0.1.2",
-  "description": "Open-source CLI toolkit by Expressible AI, Inc.",
+  "version": "0.1.3",
+  "description": "Train small, local text classifiers from labeled examples. No API keys, no cloud, no GPU.",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -14,8 +14,17 @@
     "test": "vitest run",
     "test:watch": "vitest"
   },
-  "keywords": ["ml", "local", "training", "cli", "inference"],
+  "keywords": ["ml", "local", "training", "cli", "inference", "classification", "nlp", "text-classification", "offline", "on-premise"],
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/expressibleai/expressible-cli.git"
+  },
+  "homepage": "https://expressible.ai",
+  "bugs": {
+    "url": "https://github.com/expressibleai/expressible-cli/issues"
+  },
+  "author": "Expressible AI, Inc.",
   "dependencies": {
     "@tensorflow/tfjs": "^4.22.0",
     "@tensorflow/tfjs-node": "^4.22.0",
