@@ -1,7 +1,5 @@
 # Benchmarks
 
-## What This Means for You
-
 Label 50 examples. Train a model. Get 64–95% accuracy on topic classification — with no API keys, no cloud, and no ML expertise.
 
 These benchmarks measure what happens when you give Distill 50 labeled examples and test it on text it has never seen. That's roughly 30 minutes of labeling work. The public dataset results use real-world text from datasets containing 120,000+ entries — we only used 50 samples from each. Anyone can reproduce these numbers by cloning the repo and running the test harness.

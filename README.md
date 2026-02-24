@@ -1,14 +1,12 @@
 # Expressible CLI
 
-Open-source developer tools by [Expressible AI, Inc.](https://expressible.ai)
+Train small, local text classifiers from labeled examples. No API keys, no cloud, no Python, no GPU. Your data never leaves your machine.
 
-The Expressible CLI provides local-first tooling for AI workflows where data sovereignty matters. It is part of the [Expressible platform](https://gen.expressible.ai) for secure, end-to-end software delivery.
+Open source (Apache 2.0) · Built by [Expressible AI](https://expressible.ai)
 
 ---
 
 ## Distill
-
-Train small, task-specific ML models from input/output examples. Runs entirely on your machine. Your data never leaves your environment.
 
 ![Expressible Distill demo](https://raw.githubusercontent.com/expressibleai/expressible-cli/refs/heads/main/demo.svg)
 
@@ -136,6 +134,10 @@ Everything.
 
 ---
 
+Works in environments where data can't leave the network — healthcare, financial services, legal, government, or any organization with data residency requirements.
+
+---
+
 ### Use Cases
 
 **Legal document review** — Classify contract clauses by type across thousands of agreements. Privileged documents stay within your perimeter.
@@ -160,25 +162,17 @@ With 50 labeled examples (~30 minutes of work), no API keys, and no ML expertise
 | 20 Newsgroups (5 categories) | 80.0% | [Public dataset](https://huggingface.co/datasets/SetFit/20_newsgroups) |
 | AG News (4 categories) | 64.0% | [Public dataset](https://huggingface.co/datasets/fancyzhx/ag_news) |
 
-AG News improves to 80% with 100 training samples. More data helps — see [benchmarks](docs/benchmarks.md) for scaling details.
-
-Public dataset results use real-world text from established ML benchmarks — 50 samples drawn from datasets containing 120,000+ entries. All samples and the test harness are included in the repo so you can reproduce these results:
+Reproduce these results:
 
 ```bash
 npx tsx tests/harness/run.ts
 ```
 
+**Known limitation:** Distill struggles with sentiment and tone classification (44–50% accuracy). The embedding model captures what text is *about*, not how it *evaluates*. "Amazing camera" and "terrible camera" produce nearly identical vectors. Details in [benchmarks](docs/benchmarks.md).
+
+AG News improves to 80% with 100 training samples. More data helps — see [benchmarks](docs/benchmarks.md) for scaling details. Public dataset results use real-world text from established ML benchmarks — 50 samples drawn from datasets containing 120,000+ entries.
+
 Accuracy improves as you add more examples through the review-retrain loop. Full results, methodology, and known limitations: **[docs/benchmarks.md](docs/benchmarks.md)**
-
----
-
-### Built for Environments Where Data Stays Internal
-
-- Healthcare teams handling patient records
-- Financial services processing sensitive transactions
-- Government contractors with data residency requirements
-- Legal teams working with privileged documents
-- Any organization with data sovereignty obligations
 
 ---
 
@@ -248,9 +242,7 @@ my-task/
 
 ---
 
-### Expressible Platform
-
-The CLI is the open-source, local-first layer of the Expressible platform. For teams that need governance, traceability, and managed deployment across AI-generated workloads, see [expressible.ai](https://expressible.ai).
+The CLI is fully standalone and open source. [Expressible AI](https://expressible.ai) offers additional tooling for teams that need governance and managed deployment.
 
 ### Contributing
 
